@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Executing a POC with Online Fraud Insights | Hands on Amazon Fraud Detector</title>
+  <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Executing a POC with Online Fraud Insights | Hands on Amazon Fraud Detector" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Executing a POC with Online Fraud Insights | Hands on Amazon Fraud Detector" />
+  
+  <meta name="twitter:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+<meta name="author" content="" />
+
+
+<meta name="date" content="2020-05-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter2.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About Amazon Fraud Detector</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prereq"><i class="fa fa-check"></i>Setup &amp; Prerequisites</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dpsetup1"><i class="fa fa-check"></i>Project Setup</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#s3"><i class="fa fa-check"></i>Create S3 Bucket</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create Sagemaker Instance</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#howitworks"><i class="fa fa-check"></i>Quick Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html"><i class="fa fa-check"></i>Project 1 - New Account Fraud</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#bmodel1"><i class="fa fa-check"></i>Step 1. Define model</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds1"><i class="fa fa-check"></i>Setup a Data Source</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds2"><i class="fa fa-check"></i>Create an IAM role</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds3"><i class="fa fa-check"></i>Training data source</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#configmodel"><i class="fa fa-check"></i>Step 2. Configure Model</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#map1"><i class="fa fa-check"></i>Map File Inputs</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#fraudlabel1"><i class="fa fa-check"></i>Map Fraud Label</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#rvc"><i class="fa fa-check"></i>Step 3. Create &amp; Train Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#modelperf"><i class="fa fa-check"></i>Step 4. Model Training Complete</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#mp"><i class="fa fa-check"></i>Model Performance</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#auc"><i class="fa fa-check"></i>Understanding AUC</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#confmatrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#operatingRange"><i class="fa fa-check"></i>Operating Range</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deploymodel"><i class="fa fa-check"></i>Step 5. Deploy Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createdetector"><i class="fa fa-check"></i>Step 6. Create a Detector</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#addamodel"><i class="fa fa-check"></i>Add a Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#authorrules"><i class="fa fa-check"></i>Author Rules</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ruleexecution"><i class="fa fa-check"></i>Rule Execution</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testdetector"><i class="fa fa-check"></i>Test Detector</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#publishdetector"><i class="fa fa-check"></i>Publish Detector</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#makepredictions"><i class="fa fa-check"></i>Step 7. Make Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#integrateLambda"><i class="fa fa-check"></i>Step 8. Integration with AWS Lambda &amp; REST API</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#lambda"><i class="fa fa-check"></i>Create a AWS Lambda Function</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testLambda"><i class="fa fa-check"></i>Test your Lambda</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createAPI"><i class="fa fa-check"></i>Create REST API with Amazon API Gateway</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testAPI"><i class="fa fa-check"></i>Test your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deployAPI"><i class="fa fa-check"></i>Deploy your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#curlAPI"><i class="fa fa-check"></i>Curl your REST API</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#proj1Conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Executing a POC with Online Fraud Insights</a><ul>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step1POC"><i class="fa fa-check"></i>Step 1. Determine your Use case</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step2POC"><i class="fa fa-check"></i>Step 2. Define your Evaluation Criteria</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step3POC"><i class="fa fa-check"></i>Step 3. Gather Data</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step4POC"><i class="fa fa-check"></i>Step 4. Train &amp; Evaluate a Fraud Detector Model</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step5POC"><i class="fa fa-check"></i>Step 5. Create and Publish a Detector</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step6POC"><i class="fa fa-check"></i>Step 6. Make Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step7POC"><i class="fa fa-check"></i>Step 7. Evaluate Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step8POC"><i class="fa fa-check"></i>Step 8. Integrate</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#afds"><i class="fa fa-check"></i>AWS’ Fraud Detection Strategy</a><ul>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#prevent"><i class="fa fa-check"></i>Prevent</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#contain"><i class="fa fa-check"></i>Contain</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#detect"><i class="fa fa-check"></i>Detect</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#remediate"><i class="fa fa-check"></i>Remediate</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#improve"><i class="fa fa-check"></i>Improve</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#finalconclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands on Amazon Fraud Detector</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter1" class="section level1 unnumbered">
+<h1>Executing a POC with Online Fraud Insights</h1>
+<p>We’ve provided a handy guide <a href="https://aws.amazon.com/blogs/machine-learning/catching-fraud-faster-by-building-a-proof-of-concept-in-amazon-fraud-detector/">Catching Fraud Faster by Building a Proof of Concept with Amazon Fraud Detector</a> that you can check out.</p>
+<p>To get started with a POC we recommend the following:</p>
+<div id="step1POC" class="section level3 unnumbered">
+<h3>Step 1. Determine your Use case</h3>
+<p>We recommend a <em>“Move Left”</em> strategy to start with. Evaluate “new account” registrations for probability of fraud at time of signup. We have seen customers who adopt this strategy can often identify 50-70% of bad actors at time of registration, dramatically reducing downstream efforts to stop fraud at time of transaction. Of course business needs may dictate a use case and where in the life cycle you evaluate events for fraud, but consider evaluating fraud as early as possible in your customer’s journey. Ideas for use cases</p>
+<ol style="list-style-type: decimal">
+<li>New Account/Customer Registration</li>
+<li>Guest Checkout &amp; First Transactions</li>
+<li>Abuse vectors like spam and fake product reviews</li>
+</ol>
+</div>
+<div id="step2POC" class="section level3 unnumbered">
+<h3>Step 2. Define your Evaluation Criteria</h3>
+<p>There are lots of ways to evaluate fraud. We recommend taking a “baseline” of your current efforts. If you start with new account registrations, identify how many accounts on average you register a day, a week and a month. Of those how many become fraudulent? This will give you an idea of your “Baseline”, that becomes a starting point for evaluation. Next determine how you want to evaluate, it could be number of accounts identified at registration, transaction dollars saved, investigation yield or other use case specific metric. Using these metrics you can compare the “baseline” to fraud detector’s performance.</p>
+<ol style="list-style-type: decimal">
+<li><p>Start with a Baseline</p></li>
+<li>Identify performance metrics.</li>
+</ol>
+<ul>
+<li>Fraud Identified by False Positive Rate
+<ul>
+<li>Dollars saved by Score Threshold</li>
+<li>Investigation yield</li>
+<li>Time to Detect</li>
+</ul></li>
+</ul>
+</div>
+<div id="step3POC" class="section level3 unnumbered">
+<h3>Step 3. Gather Data</h3>
+<p>Data gathering dictates the duration and success of a POC. Data gathering is typically an iterative process of extraction and data profiling to ensure that there is enough training data and enough labels to train a model with.</p>
+<p><strong>More data is better, but you can get started with a little.</strong></p>
+<p>Except in rare cases, more data is generally better than less. Fraud Detector’s Online Fraud Insights(OFI) model requires a minimum of 10k records with at least 500 of those records identified as fraudulent; however, the more records and variety of fraudulent examples you provide the better. That does not’t mean you should artificially create examples, instead just get more historic events. Of course that does not’t mean upload the kitchen sink! Fraud Detector’s Online Fraud Insight(OFI) template only requires a Date or Timestamp, an IP address, email address, and a Field that identifies Fraud / Not Fraud.</p>
+<p><strong>Minimal Dataset Guidance</strong>
+The Online Fraud Insights(OFI) model requires a minimum of 10k records to be gathered with of those 500 records identified as fraud. OFI only requires a date/timestamp, email address, ip address and fraud label. We recommend a minimum of 6 weeks of historic data is collected, though 3 - 6 months of data is preferable. As part of the process the OFI model partitions your data based on the Event Timestamp such that performance metrics are calculated on the out of sample (latest) data, thus the format of the event timestamp is important.</p>
+<p>Here is a sample of a minimally required dataset:</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+ip_address
+</th>
+<th style="text-align:left;">
+email_address
+</th>
+<th style="text-align:left;">
+event_timestamp
+</th>
+<th style="text-align:left;">
+fraud_label
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+125.164.142.171
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_millerdavid@example.org" class="email">fake_millerdavid@example.org</a>
+</td>
+<td style="text-align:left;">
+2019-10-04 07:02:55
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.52.200.124
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_wmichael@example.net" class="email">fake_wmichael@example.net</a>
+</td>
+<td style="text-align:left;">
+2018-11-27 12:47:03
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+169.240.240.125
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_xkramer@example.org" class="email">fake_xkramer@example.org</a>
+</td>
+<td style="text-align:left;">
+2019-01-08 09:11:14
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.7.68.168
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_hnelson@example.com" class="email">fake_hnelson@example.com</a>
+</td>
+<td style="text-align:left;">
+2018-12-29 19:51:09
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.52.192.228
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_andre54@example.com" class="email">fake_andre54@example.com</a>
+</td>
+<td style="text-align:left;">
+2019-03-18 08:06:46
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+169.209.112.148
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_jcraig@example.com" class="email">fake_jcraig@example.com</a>
+</td>
+<td style="text-align:left;">
+2019-06-13 05:34:14
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+106.162.85.104
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_pmorris@example.net" class="email">fake_pmorris@example.net</a>
+</td>
+<td style="text-align:left;">
+2019-03-17 00:14:01
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.249.186.94
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_mfarrell@example.net" class="email">fake_mfarrell@example.net</a>
+</td>
+<td style="text-align:left;">
+2019-08-06 21:14:55
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Data &amp; Label Maturity</strong></p>
+<p>As part of the data gathering process we want to insure that records have had sufficient time to “mature”, i.e. that enough time has passed to insure “non-fraud” and “fraud” records have been correctly identified. It often takes 30 - 45 days (or more) to correctly identify fraudulent events, because of this it is important to insure that the latest records are at least 30 days old or older. For example in the case of detecting charge back fraud, it generally takes a statement cycle or more to identify a fraudulent charge. We recommend that the most recent data in your dataset is at least 4 weeks old, but you know your data best, so use your judgment in deciding which data is old enough to be reliable. That said, don’t expect that models trained on data from 2018 to perform well when you predict on data from 2020. That is because fraud patterns change, sometimes quickly, so we recommend that the oldest data is no more than a year old.</p>
+<ul>
+<li>Earliest training data is at least 4 - 6 weeks old</li>
+<li>Oldest data is no more than a year old.</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-56"></span>
+<img src="img/label_imaturity.png" alt="Example of potentially immature fraud labels starting at day 80 through 90+" width="100%" />
+<p class="caption">
+Figure 4: Example of potentially immature fraud labels starting at day 80 through 90+
+</p>
+</div>
+<p><strong>Data Quality matters</strong></p>
+<p>Fraud detector takes care of most of your data quality issues on your behalf as part of its normal training process, however there are a couple of gotchas that can easily be addressed with some pre-planning and profiling of your data. The following guidance can help you avoid the most common issues we’ve seen with customer data.</p>
+<p><em>CSV File not in UTF-8 format.</em> File encoding like Latin-1 (iso-8859-1) can cause file read-issues because Fraud Detector is expecting data to be in UTF-8 format. You can easily convert most any non-UTF-8 format file to UTF-8 with this simple command line recipe.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># first figure out the character set of your file</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="op">&gt;</span> <span class="bu">file</span> <span class="op">-</span>I yourfile.csv</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"> yourfile.csv: text<span class="op">/</span>plain<span class="op">;</span> <span class="op">*</span>charset<span class="op">**=</span>iso<span class="dv">-8859-1</span><span class="op">*</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># second convert your file to UTF-8 </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="op">&gt;</span> iconv <span class="op">-</span>f <span class="op">*</span>iso<span class="op">**-</span><span class="dv">8859-1</span> <span class="op">*-</span>t <span class="op">*</span>UTF<span class="op">**-</span><span class="dv">8</span><span class="op">**</span> <span class="op">*</span>yourfile.csv <span class="op">&gt;</span> yourfile_utf8.csv</a></code></pre></div>
+<p><em>Required Fields and Nulls.</em> The Online Fraud Insight model template has 4 required fields. Fraud detector checks required fields to insure that they contain less than 1% nulls in those fields.</p>
+<ul>
+<li>Consider removing records that have nulls in the Fraud Label, IP or Email Address fields</li>
+</ul>
+<p><em>Three or more Fraud outcomes?</em> It is common that multiple codes are used in source systems to identify fraud often different codes map to different types of fraud. Fraud detector makes a check to insure that all of the fraud labels are mapped to either “Legitimate” and “Fraud” outcomes.</p>
+<ul>
+<li>Map all of your Fraud Labels to either “Legitimate” and “Fraud” outcomes.</li>
+</ul>
+<blockquote>
+<p>Sidebar: What about indeterminate records, that is records can’t be mapped to fraud or legitimate? One strategy to consider excluding those for model training, then using them as an evaluation dataset to apply your detector to.</p>
+</blockquote>
+<p><em>Dates and Times.</em> All dates and timestamps should be in one of the following formats: mm/dd/yyyy, mm/dd/yyyy hh:mm:ss, or yyyy-mm-dd hh:mm:ss. for example 2020/01/30 13:01:01 is valid but 01/30/20 is not because it does not contain a 4 digit year.</p>
+<blockquote>
+<p>Sidebar: Many people use Microsoft Excel to look at their data and save it as CSV. Excel will default the format of a date based on the computer’s locale setting which often deviates from the 4-digit year formats Fraud Detector expects. For example on my computer dates are presented as m/d/yy format i.e. 4/1/20 for April 1st 2020. You can change the date format by specifying a custom format in Excel similar to the ones presented above, then save as CSV.</p>
+</blockquote>
+<p><em>IP Address Format.</em> Fraud detector validates that IP addresses are in either IPv4 (x.x.x.x) or IPv6 formats. Fraud detector enriches IP addresses with additional information including IP geolocation, ISP, domain as well as Amazon “embeddings”, which includes IP related fraud patterns that Amazon has seen.</p>
+<p><em>Email Address Format. </em>Fraud detector validates that email addresses follow the standard <a href="mailto:local-part@domain.extension" class="email">local-part@domain.extension</a> format for example <a href="mailto:Joseph.Conrad@example.com" class="email">Joseph.Conrad@example.com</a> is valid but <a href="mailto:Joseph%Conrad!@$example.com" class="email">Joseph%Conrad!@$example.com</a> is not. Like IP addresses, email addresses are also parsed and enriched with additional information including Amazon “embeddings”</p>
+<p>**Add Variety* *</p>
+<p>In addition to a number of pre-defined field types, Fraud Detector also provides the ability to pass “custom” numeric, categorical and free form text as part of your model. You can use these field types to add some variety and potentially useful features into your Fraud Detector model.</p>
+<p><em>Custom Numeric</em> - use this variable type for any “continuous” numeric variable. If in doubt, ask yourself “in the normal course of business”, would I take the average or sum of this variable? if the answer is yes then you most likely have a variable that can be mapped to a “custom numeric” field type. For example, total order amount, age of account, or days since last visit all would be good candidates for a custom numeric variable.</p>
+<p><em>Custom Categorical</em> - use this variable type for any numeric or string variable that you can segment your data into into groups with. If in doubt, ask your self “in the normal course of business”, would I “group by” or look at the frequency count of this variable? If the answer is yes then you probably have a categorical variable. Examples of categorical variables include customer type, product category, or even something like region.</p>
+<p><em>Custom Free form Text</em> - Use this variable type for any “text” features. This could be things like customer reviews, contact notes, or even list of product types. Fraud Detector has a unique way that it converts “text” features into potentially useful features that can be consumed by the Fraud Detector model.</p>
+<p><strong>What are some ideas for useful fields?</strong></p>
+<p>Here are two easy ideas for useful features that you may be able to add to your fraud detector dataset with minimal effort.</p>
+<p><em>Day and Time features</em> can be useful for identifying a variety of fraudulent and legitimate patterns, like day of week that is mapped to a custom categorical field may useful for identifying trends during the week or a field like hour of the day mapped to a custom numeric field might be useful to identify when patterns of when fraud occurs. Even time zones mapped as a custom categorical variable can be a useful feature for identifying odd fraud patterns.</p>
+<p><em>Age related variables</em> are also often useful, for example the number of days between account creation and an event is often a powerful variable for identifying fraudulent activity because new accounts or recently created accounts are often 2-10X more-likely to commit fraud.</p>
+<blockquote>
+<p>Sidebar: There’s a notebook for that!
+We’ve provided a notebook and a python package in our git hub repository that can help identify potential data quality issues in your data. Check it out <a href="https://github.com/aws-samples/aws-fraud-detector-samples/tree/master/Fraud%20Detector%20Data%20Profiling">Fraud Detector Profiling Notebook</a></p>
+</blockquote>
+<p><strong>Carve records for Evaluation</strong></p>
+<p>There are a couple strategies that can be helpful. One strategy is to carve off 5-20k <em>recent</em> records from your gathered data to use to <em>“evaluate”</em> your detector. Here you would divide your dataset into a training set and another for evaluation. Since the data is labeled it makes it pretty easy to evaluate how effective it is for fraud detector to identify known fraud. Another strategy is to use recent <em>unlabeled</em> data for evaluation. With this strategy, you don’t know the labels but you can use your Detector to identify likely fraud, then simply take the output and have “predicted” fraud manually evaluated and labeled. This strategy is nice because you can get immediate benefit from using Fraud Detector.</p>
+</div>
+<div id="step4POC" class="section level3 unnumbered">
+<h3>Step 4. Train &amp; Evaluate a Fraud Detector Model</h3>
+<p>Simply follow the steps outlined in Project 1 to train and evaluate a model. Fraud Detector models are only as good as the training data, so it’s common to iterate and train with different data sets. Once satisfied with model performance, simply deploy it.</p>
+</div>
+<div id="step5POC" class="section level3 unnumbered">
+<h3>Step 5. Create and Publish a Detector</h3>
+<p>Follow the steps outlined in Project 1 to create a detector, author rules, evaluate and publish a Detector. The rule authoring is a key activity that you’ll want to focus on. The model statistics suggest a score threshold but depending on the use case you may want to author additional rules.</p>
+</div>
+<div id="step6POC" class="section level3 unnumbered">
+<h3>Step 6. Make Predictions</h3>
+<p>Once you’ve published your Detector, you can follow the steps to make predictions using the get_prediction API. We have provided an example notebook Fraud Detector Predictions() to help you make predictions with your evaluation data, actually with these notebooks you can evaluate any data that matches the input format of your Detector.</p>
+</div>
+<div id="step7POC" class="section level3 unnumbered">
+<h3>Step 7. Evaluate Predictions</h3>
+<p>Now that you have predictions and outcomes from your Detector. Evaluate your predictions and actions from both a business and a data science perspective. From a business perspective you can look at fraud identified, dollars saved and investigation yield. If labels are available on your evaluation data, you can feasibility create a confusion matrix and calculate AUC and a TPR/FPR/Score Threshold Table.</p>
+<p><em>business perspective</em><br />
+- Fraud Identified by False Positive Rate<br />
+- Dollars saved by Score Threshold
+- Investigation yield
+- Time to Detect</p>
+<p><em>data science perspective</em>
+- Confusion Matrix
+- AUC &amp; ROC
+- TPR/FPR/Score Threshold</p>
+</div>
+<div id="step8POC" class="section level3 unnumbered">
+<h3>Step 8. Integrate</h3>
+<p>Integration can be as easy as calling the get_prediction function from python. More likely however, is that you’ll want to create some form of a REST endpoint. Back in “Project 1” we provided an example of creating a REST API and a Lambda function. There are so many ways you can integrate it really depends on your use case and operational needs.</p>
+</div>
+<div id="afds" class="section level2 unnumbered">
+<h2>AWS’ Fraud Detection Strategy</h2>
+<p>Ever wonder how AWS protects their users from fraud? It is a well known fact that AWS has one of the best and most sophisticated Fraud Detection systems on the planet. While I can’t give away the details of what Amazon and AWS do to product customers, I can share the strategy and best practices that are used to protect Amazon and AWS. And guess what? Amazon Fraud Detector was built upon those same strategies and best practices. Combining your data with the the latest in machine learning science and more than 20 years of fraud detection experience from Amazon.com and AWS. The AWS strategy can be summed up as <strong>P</strong>revent &gt; <strong>D</strong>etect &gt; <strong>R</strong>emediate &gt; <strong>C</strong>ontain and <strong>I</strong>mprove strategy that protects. The following wile provide a little insight into how to employ a similar strategy in your environment.</p>
+<div id="prevent" class="section level3 unnumbered">
+<h3>Prevent</h3>
+<p>Prevention starts when customers register new accounts. Since most fraud(70-90%) occurs within the first 90 days of account opening,it’s important to start with a plan to analyze New Account Registrations. We recommend start by building a model and deploying detector to identify potentially fraudulent accounts when they register. The following is an example of a New Account Registration schema.</p>
+<p><em>New Account Registration</em></p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Attribute
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+customer_id
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Identifier of the customer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_name
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+customer name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_email
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Email of the user creating this transaction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_phone
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Phone number of the user creating this transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+registration_date
+</td>
+<td style="text-align:left;">
+DateTime
+</td>
+<td style="text-align:left;">
+Customer registration date
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ip_address
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+ip addressed used to create the transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_agent
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+user agent of the browser that is used to create the transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+billing_address
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+billing address
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+billing_city
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+city name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+billing_state_province
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+state / proince code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+billing_postal
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+postal code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+billing_country
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+country code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+registration_fraud
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Fraud / Not-Fraud
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="contain" class="section level3 unnumbered">
+<h3>Contain</h3>
+<p>A containment strategy, essentially limiting exposure to new account activity, is a simple and effective way to “contain” exposure to potential fraudulent events once an account has been successfully registered. Rules that look at account age and limit initial activity or add additional friction for first actions is a simple approach to limit potential fraud exposure.
+For example in an eCommerce setting a user could author a simple rule that simply asks for additional verification if the initial spend is over a threshold based on account age.</p>
+<blockquote>
+<p>IF $account_age LESS THAN 30 Days AND $transaction_amount &gt; 200 THEN additional_verification</p>
+</blockquote>
+<p>Another example in a service provider setting might be to limit the number of activities a user can perform on the service based on the time since previous action. A rule might look something like this:</p>
+<blockquote>
+<p>IF $account_age LESS THAN 30 Days AND $previous_event LESS THAN 1 Day THEN additional_friction</p>
+</blockquote>
+<p>A containment strategy, offers that little bit of extra protection until a customer becomes “trusted”. While the strategy is relatively simple, it offers a lot of business benifits. We have seen that customers that employ a containment strategy are able to identify fraudulent actors faster, minimize customer friction, and more importantly limit real dollar losses while limiting impact to legitimate customers.</p>
+</div>
+<div id="detect" class="section level3 unnumbered">
+<h3>Detect</h3>
+<p>Visa estimates that 1.2B Card-Not-Present (CNP) declines are <strong>false positives</strong> and LexisNexis’ found that one-third of declined transactions by online merchants were <strong>false positives</strong>. Once an account is registered, it is common to analyze first activities, events and transactions differently than subsequent events. One successful strategy is to create a separate <strong>“first fraud”</strong> model that allows you to analyze “<em>initial</em>” activities sparely from subsequent events. A common tactic that many fraud departments employ is combine a containment strategy with multiple models based on activity type. This allows firms to assess risk of actions, events and transactions in a more granular context. In the end it is about building a better mousetrap that finds fraud faster while minimizes good customer friction.</p>
+<p>The following is an example schema for a <em>First Fraud</em> model.</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Attribute
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+transaction_id
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+ID for identifying this transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+transaction_timestamp
+</td>
+<td style="text-align:left;">
+datetime
+</td>
+<td style="text-align:left;">
+timestamp of the transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+transaction_amount
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+amount of the transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+transaction_currency
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+currency code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+transaction_type
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+type of transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_id
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Identifier of the customer
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_name
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+customer name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_email
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Email of the user creating this transaction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_phone
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+Phone number of the user creating this transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_days_registered
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+days since account registered
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_days_since
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+days since customer last updated account
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ip_address
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+ip addressed used to create the transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_agent
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+user agent of the browser that is used to create the transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+payment_method
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+payment information associated with this transaction
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+payment_ccard_bin
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+card bin first 6 digits of a credit card
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+payment_avs_response
+</td>
+<td style="text-align:left;">
+string
+</td>
+<td style="text-align:left;">
+AVS codes determine the match or partial match of the consumer’s address information
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="remediate" class="section level3 unnumbered">
+<h3>Remediate</h3>
+<p>Detectors produce scores and outcomes from models and rules. The natural byproduct of scores is either to take an automated decision or to “queue” a event for manual review. The manual review process is necessary when we can’t quite confidently make a determination about an event, whether it’s fraud or not. Manual review is also useful when we want to test <em>“below the line”</em> events, that is where an event scores just below our threshold.</p>
+<p>For example suppose we automatically decline transactions receiving a score greater than 800 and we manually review transactions between 500 and 800. We might want to take a small sample of records “just below” the 500 threshold to double check that we aren’t missing fraud. Manual review is generally a balancing act. On one hand you want to catch as much fraud as possible but on the other you don’t want to review every transaction.</p>
+</div>
+<div id="improve" class="section level3 unnumbered">
+<h3>Improve</h3>
+<p>Fraud detection works best as a closed loop system. In order to improve we want to feed newly identified frauds back into our system. Periodic re-training of models and testing of rules is part of the normal course of business. As your fraud detection systems get better and new patterns are identified take the opportunity to review existing models and rules. There is an adage in machine learning “if one model is good, more models is better” .</p>
+</div>
+</div>
+<div id="finalconclusion" class="section level2 unnumbered">
+<h2>Conclusion</h2>
+<p>Fraud Detector’s Online Fraud Insight(OFI) model template is only limited by your ability to gather and prepare data. While initial use cases centered around new account registration and guest checkout, we have seen where fraud detector can be applied to a wide variety of other use cases - including detecting fraudulent reservations, digital orders, identify spam as well detecting promotion abuse.</p>
+<p>In addition to this tutorial we also have a number of notebooks available to help get the most out of your Fraud Detector experience.</p>
+<ul>
+<li><a href="https://github.com/aws-samples/aws-fraud-detector-samples/tree/master/Fraud%20Detector%20End%20to%20End">Fraud Detector End to End</a></li>
+<li><a href="https://github.com/aws-samples/aws-fraud-detector-samples/tree/master/Fraud%20Detector%20Predict">Fraud Detector Predict</a></li>
+<li><a href="https://github.com/aws-samples/aws-fraud-detector-samples/tree/master/Fraud%20Detector%20Data%20Profiling">Fraud Detector Profile</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

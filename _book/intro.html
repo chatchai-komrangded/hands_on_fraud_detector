@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Hands on Amazon Fraud Detector</title>
+  <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Hands on Amazon Fraud Detector" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hands on Amazon Fraud Detector" />
+  
+  <meta name="twitter:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+<meta name="author" content="Michael Ames | mikames@amazon.com" />
+
+
+<meta name="date" content="2020-04-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="chapter1.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#prereq"><i class="fa fa-check"></i>Setup &amp; Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#howitworks"><i class="fa fa-check"></i>Quick Overview</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#about"><i class="fa fa-check"></i>About Amazon Fraud Detector</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Fraud Strategy</a><ul>
+<li class="chapter" data-level="0.1" data-path="chapter1.html"><a href="chapter1.html#section-1"><i class="fa fa-check"></i><b>0.1</b> Section 1</a></li>
+<li class="chapter" data-level="0.2" data-path="chapter1.html"><a href="chapter1.html#section-2"><i class="fa fa-check"></i><b>0.2</b> Section 2</a><ul>
+<li class="chapter" data-level="0.2.1" data-path="chapter1.html"><a href="chapter1.html#section-2a."><i class="fa fa-check"></i><b>0.2.1</b> Section 2a.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html"><i class="fa fa-check"></i>Project 1 - New Account Fraud</a><ul>
+<li class="chapter" data-level="0.3" data-path="chapter2.html"><a href="chapter2.html#section-1-1"><i class="fa fa-check"></i><b>0.3</b> Section 1</a></li>
+<li class="chapter" data-level="0.4" data-path="chapter2.html"><a href="chapter2.html#section-2-1"><i class="fa fa-check"></i><b>0.4</b> Section 2</a><ul>
+<li class="chapter" data-level="0.4.1" data-path="chapter2.html"><a href="chapter2.html#section-2a.-1"><i class="fa fa-check"></i><b>0.4.1</b> Section 2a.</a></li>
+</ul></li>
+<li class="chapter" data-level="0.5" data-path="chapter2.html"><a href="chapter2.html#r-markdown"><i class="fa fa-check"></i><b>0.5</b> R Markdown</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands on Amazon Fraud Detector</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Hands on Amazon Fraud Detector</h1>
+<p class="author"><em>Michael Ames | <a href="mailto:mikames@amazon.com" class="email">mikames@amazon.com</a></em></p>
+<p class="date"><em>2020-04-27</em></p>
+</div>
+<div id="intro" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p>Amazon Fraud Detector is a fully managed service that makes it easy to identify potentially fraudulent online activities such as the creation of fake accounts or online payment fraud. Unlike general purpose machine learning packages, Fraud Detector is designed specifically to detect fraud and rare events. Fraud Detector combines your data, the latest in machine learning science, and more than 20 years of fraud detection experience from Amazon.com and AWS to build machine learning models tailor-made to detect fraud in your business. This distributed workshop has been designed to help get the most out of your Fraud Detector Experience.</p>
+<div id="prereq" class="section level2 unnumbered">
+<h2>Setup &amp; Prerequisites</h2>
+<p>While Fraud Detector is in public preview, to get started, you need to have your account white listed to get access to Amazon Fraud Detector. White listing is a simple matter of filling out a form. It takes about a day to get your account enabled, you’ll receive an email once it’s complete. Once enabled follow the steps in the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/set-up.html">Fraud Detector User Guide</a> to setup permissions and create an IAM user and assign required permissions.</p>
+</div>
+<div id="howitworks" class="section level2 unnumbered">
+<h2>Quick Overview</h2>
+<p>Building a model and deploying a detector is a pretty straight forward process. As a user, simply upload a CSV containing your historic events to an S3 bucket. Next configure your model in console by mapping your file’s fields to Fraud Detector data types and initiate training.</p>
+<div class="figure"><span id="fig:howitworks"></span>
+<img src="img/howitworks.png" alt="How it Works" width="100%" />
+<p class="caption">
+Figure 1: How it Works
+</p>
+</div>
+<p><strong>Model Training</strong><br />
+Behind the scenes fraud detector takes care of the heavy lifting you. It loads your data into memory, inspects the data and performs a variety of integrity checks. It enriches variables like IP address, Email address, and Credit Card Bin (and others) with additional information like Geo-location data, autonomous system numbers (ASN) as well as Amazon enrichment. Finally, Fraud Detector evaluates various algorithms and optimizes their performance producing a Model ready to attack fraud.</p>
+<p><em>Fraud Detector’s Amazon Enrichment brings patterns and fraud signal to customer’s data based on past attempts to defraud Amazon, Amazon Subsidiaries and AWS</em></p>
+<p><strong>Detector</strong><br />
+A detector most easily thought of a wrapper around models and rules, it produces the actual endpoint that you’ll run predictions from. You build a detector by adding a model and authoring 0, 1 or more Rules.</p>
+</div>
+<div id="goals" class="section level2 unnumbered">
+<h2>Goals</h2>
+<p>By the end of this workshop, you should have picked up the following skills:</p>
+<ul>
+<li>Prepare and map data-sets to Amazon Fraud Detector.</li>
+<li>Identify common customer use cases.</li>
+<li>Train Models, Author Rules and Deploy Detectors using the Fraud Detector Console.</li>
+<li>Train Models, Author Rules and Deploy Detectors using the APIs and Python.</li>
+<li>Interpret model performance metrics.</li>
+<li>Define strategies to get the most out of Fraud Detector Models &amp; Rules</li>
+<li>Call the Detector’s get_prediction API to score data</li>
+<li>Lead a successful Proof of Concept!</li>
+</ul>
+</div>
+<div id="about" class="section level2 unnumbered">
+<h2>About Amazon Fraud Detector</h2>
+<p>If you are not familiar with Amazon Fraud Detector you can learn more about it here:</p>
+<ul>
+<li><a href="https://aws.amazon.com/fraud-detector/">Product Page</a><br />
+</li>
+<li><a href="https://docs.aws.amazon.com/frauddetector/">Product Documentation</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="chapter1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

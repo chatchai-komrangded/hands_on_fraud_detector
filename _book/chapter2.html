@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Project 1 - New Account Fraud | Hands on Amazon Fraud Detector</title>
+  <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Project 1 - New Account Fraud | Hands on Amazon Fraud Detector" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Project 1 - New Account Fraud | Hands on Amazon Fraud Detector" />
+  
+  <meta name="twitter:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+<meta name="author" content="" />
+
+
+<meta name="date" content="2020-05-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="chapter1.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About Amazon Fraud Detector</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prereq"><i class="fa fa-check"></i>Setup &amp; Prerequisites</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dpsetup1"><i class="fa fa-check"></i>Project Setup</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#s3"><i class="fa fa-check"></i>Create S3 Bucket</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create Sagemaker Instance</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#howitworks"><i class="fa fa-check"></i>Quick Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html"><i class="fa fa-check"></i>Project 1 - New Account Fraud</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#bmodel1"><i class="fa fa-check"></i>Step 1. Define model</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds1"><i class="fa fa-check"></i>Setup a Data Source</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds2"><i class="fa fa-check"></i>Create an IAM role</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds3"><i class="fa fa-check"></i>Training data source</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#configmodel"><i class="fa fa-check"></i>Step 2. Configure Model</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#map1"><i class="fa fa-check"></i>Map File Inputs</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#fraudlabel1"><i class="fa fa-check"></i>Map Fraud Label</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#rvc"><i class="fa fa-check"></i>Step 3. Create &amp; Train Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#modelperf"><i class="fa fa-check"></i>Step 4. Model Training Complete</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#mp"><i class="fa fa-check"></i>Model Performance</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#auc"><i class="fa fa-check"></i>Understanding AUC</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#confmatrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#operatingRange"><i class="fa fa-check"></i>Operating Range</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deploymodel"><i class="fa fa-check"></i>Step 5. Deploy Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createdetector"><i class="fa fa-check"></i>Step 6. Create a Detector</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#addamodel"><i class="fa fa-check"></i>Add a Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#authorrules"><i class="fa fa-check"></i>Author Rules</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ruleexecution"><i class="fa fa-check"></i>Rule Execution</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testdetector"><i class="fa fa-check"></i>Test Detector</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#publishdetector"><i class="fa fa-check"></i>Publish Detector</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#makepredictions"><i class="fa fa-check"></i>Step 7. Make Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#integrateLambda"><i class="fa fa-check"></i>Step 8. Integration with AWS Lambda &amp; REST API</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#lambda"><i class="fa fa-check"></i>Create a AWS Lambda Function</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testLambda"><i class="fa fa-check"></i>Test your Lambda</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createAPI"><i class="fa fa-check"></i>Create REST API with Amazon API Gateway</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testAPI"><i class="fa fa-check"></i>Test your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deployAPI"><i class="fa fa-check"></i>Deploy your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#curlAPI"><i class="fa fa-check"></i>Curl your REST API</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#proj1Conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Executing a POC with Online Fraud Insights</a><ul>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step1POC"><i class="fa fa-check"></i>Step 1. Determine your Use case</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step2POC"><i class="fa fa-check"></i>Step 2. Define your Evaluation Criteria</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step3POC"><i class="fa fa-check"></i>Step 3. Gather Data</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step4POC"><i class="fa fa-check"></i>Step 4. Train &amp; Evaluate a Fraud Detector Model</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step5POC"><i class="fa fa-check"></i>Step 5. Create and Publish a Detector</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step6POC"><i class="fa fa-check"></i>Step 6. Make Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step7POC"><i class="fa fa-check"></i>Step 7. Evaluate Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step8POC"><i class="fa fa-check"></i>Step 8. Integrate</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#afds"><i class="fa fa-check"></i>AWS’ Fraud Detection Strategy</a><ul>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#prevent"><i class="fa fa-check"></i>Prevent</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#contain"><i class="fa fa-check"></i>Contain</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#detect"><i class="fa fa-check"></i>Detect</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#remediate"><i class="fa fa-check"></i>Remediate</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#improve"><i class="fa fa-check"></i>Improve</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#finalconclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands on Amazon Fraud Detector</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter2" class="section level1 unnumbered">
+<h1>Project 1 - New Account Fraud</h1>
+<p>New account fraud is generally defined as fraud that occurs within the first 90 days of an account opening. These accounts are opened with the sole purpose to commit fraud. Typically, criminals wait 30 days or more before making the first transaction, which is often a low dollar amount say $5 - $200 to “test” a company’s fraud detection system, but often it can be much more. For example Verizon <a href="https://www.verizon.com/about/news/message-ronan-dunne-verizon-consumer-group">reported</a> that new subscriber fraud has gotten so out of hand that (7000 phones stolen a moth) they hat to go to the FC to change regulations in order to put a <a href="https://www.verizon.com/about/news/message-ronan-dunne-verizon-consumer-group">60 day lock down</a> on new phones and to help them deal with the spike in losses. While on the surface, 7000 frauds a month doesn’t sound like much until you factor in that the average cost of a cell phone in the US is $528, thats at least $3.6M in real-dollar losses a month.In this project you are going to build a “New Account Registration” model and detector.</p>
+<p>&lt; insert video &gt;</p>
+<p><img src="img/buildModel.png" width="100%" /></p>
+<div id="bmodel1" class="section level2 unnumbered">
+<h2>Step 1. Define model</h2>
+<p>To build a model is pretty straight forward, basically we upload a CSV file, map the file’s fields to the model input types, train it, evaluate it and deploy it. The steps are outlined below.</p>
+<ul>
+<li>Name your model <strong><em>project_1_model</em></strong> you can also give it an arbitrary description. We’ll use the name of the model downstream…</li>
+</ul>
+<p><img src="img/createmodel.png" width="100%" /></p>
+<div id="ds1" class="section level3 unnumbered">
+<h3>Setup a Data Source</h3>
+<p>You’ll need to either re-use or create a new <strong><em>IAM role</em></strong>. So that fraud detector can get to your S3 file.</p>
+<p><img src="img/iamrole1.png" width="100%" /></p>
+</div>
+<div id="ds2" class="section level3 unnumbered">
+<h3>Create an IAM role</h3>
+<p>Create an IAM role and point it to our S3 bucket <strong><em>hands-on-frauddetector</em></strong>, we created in the beginning.</p>
+<p><img src="img/iamrole2.png" width="100%" /></p>
+</div>
+<div id="ds3" class="section level3 unnumbered">
+<h3>Training data source</h3>
+<p>Point your new IAM role to the project 1 training file stored in S3 <em>s3://hands-on-frauddetector/project_1_newaccounts_100k.csv</em></p>
+<p><img src="img/iamrole3.png" width="100%" /></p>
+</div>
+</div>
+<div id="configmodel" class="section level2 unnumbered">
+<h2>Step 2. Configure Model</h2>
+<div id="map1" class="section level3 unnumbered">
+<h3>Map File Inputs</h3>
+<p>Map the CSV file column headers to model inputs. Here you’ll want to make sure that you’ve mapped the file variables to Fraud Detector model inputs. The table below provides the mappings for the project_1_newaccount.csv file.</p>
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Column Header
+</th>
+<th style="text-align:left;">
+Model Input
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+user_agent
+</td>
+<td style="text-align:left;">
+USERAGENT
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+phone_number
+</td>
+<td style="text-align:left;">
+PHONE_NUMBER
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ip_address
+</td>
+<td style="text-align:left;">
+IP_ADDRESS
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_state
+</td>
+<td style="text-align:left;">
+BILLING_STATE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_name
+</td>
+<td style="text-align:left;">
+CATEGORICAL
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_postal
+</td>
+<td style="text-align:left;">
+BILLING_ZIP
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+email_address
+</td>
+<td style="text-align:left;">
+EMAIL_ADDRESS
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer_city
+</td>
+<td style="text-align:left;">
+BILLING_CITY
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+event_timestamp
+</td>
+<td style="text-align:left;">
+EVENT_TIMESTAMP
+</td>
+</tr>
+</tbody>
+</table>
+<div id="mip" class="section level5 unnumbered">
+<h5>Simply select model input mappings.</h5>
+<p><img src="img/mapinputs.png" width="100%" /></p>
+</div>
+</div>
+<div id="fraudlabel1" class="section level3 unnumbered">
+<h3>Map Fraud Label</h3>
+<p>Map the *<strong>is_fraud</strong> column to the Fraud Label input.</p>
+<p><img src="img/mapfraudlabel.png" width="100%" /></p>
+<p><strong>Specify Fraud / Not-Fraud</strong></p>
+<p>Fraud labels can often contain more than two values, you just need to identify which values map to fraud and legitimate (i.e. not fraud). In this case our dataset has an indicator <strong><em>“1”</em></strong> meaning <em>fraud</em> and a <strong><em>“0”</em></strong> meaning <em>not-fraud</em>. Multiple label values can be separated with commas. Fraud detector will run a validation check to insure that there are no additional levels found in the label column and will throw a warning if additional levels are found.</p>
+<p><img src="img/maplabeldata.png" width="100%" /></p>
+</div>
+</div>
+<div id="rvc" class="section level2 unnumbered">
+<h2>Step 3. Create &amp; Train Model</h2>
+<p><em>Model Name &amp; Description</em></p>
+<p><img src="img/review1config.png" width="100%" /></p>
+<p><em>Model Input Mapping</em></p>
+<p><img src="img/review2config.png" width="100%" /></p>
+<p><em>Fraud Label Mapping </em>
+<img src="img/review3config.png" width="100%" /></p>
+<p><em>Finally, Train Model</em>
+<img src="img/train1.png" width="100%" /></p>
+</div>
+<div id="modelperf" class="section level2 unnumbered">
+<h2>Step 4. Model Training Complete</h2>
+<p>Fraud detector trains a number of models with different hyper parameters for you behind the scenes. This is why model can take anywhere from 45 minutes to an hour or more depending on number of features and training dataset size. Model training is kicked off in the background so in the console you can monitor training. Once training has completed, you’ll see model performance results in the console.</p>
+<p>Here you can see that we have a model with an AUC of 0.98 that is <em>“Ready to deploy”</em> before we get to that however lets dig into the model performance.<br />
+<img src="img/modelfinishtrain.png" width="100%" /></p>
+<p><strong>Model Overview</strong></p>
+<p>Here is a quick summary of the model, when it was trained, last updated and status</p>
+<p><img src="img/modeloverviewtrain.png" width="100%" /></p>
+<div id="mp" class="section level3 unnumbered">
+<h3>Model Performance</h3>
+<p>Next we are presented with a measure of the Model’s performance, Area Under Curve or AUC and a suggested score threshold of 500 to separate fraudulent from legitimate events. Based on a score threshold of 500, you would author a rule rule that says IF <strong>model score</strong> GREATER OR EQUAL TO <strong>500</strong> THEN <strong>event is fraud</strong>. We’ll dig into these a bit more.</p>
+<p><img src="img/modelperformance1.png" width="100%" /></p>
+</div>
+<div id="auc" class="section level3 unnumbered">
+<h3>Understanding AUC</h3>
+<p>AUC is a measure of model performance, think of it as a measure of how well the model separates your data into classes i.e. fraud / not-fraud. It’s often mistaken for accuracy which is simply how often a model is right and wrong. A better way think about AUC is to think of it as the percentage chance that the model is able to distinguish between fraud and not-fraud. For example an AUC of 0.9 essentially means that there is a 90% chance that the model is able to distinguish between Fraud and Not-Fraud. AUC typically ranges between 0.5, essentially a random guess, to 1.0 a model that perfectly distinguishes fraud and legitimate events. As long as the AUC of your model is greater than 0.5 your model is doing better than random chance. That is the model has learned something about how to separate fraud from legitimate events. Of course, a model with a higher AUC is better at distinguishing between fraud and legitimate events, that doesn’t mean a model with say a AUC of 0.7 isn’t good it just means that at the same “operating range” it may not be as good at identifying fraud and not-fraud as a model with a higher AUC.</p>
+<p><em>“Any Model is better than No Model at all”</em> - a data scientist</p>
+<p><strong>Score Distribution and Operating Range</strong></p>
+<p>Using the interactive Score Distribution chart you can interactively identify a score threshold and see and the resulting expected operating range. Essentially the percentage of fraud caught and false positives created for a specific score threshold.</p>
+<p><img src="img/modelscoredist.png" width="100%" /></p>
+</div>
+<div id="confmatrix" class="section level3 unnumbered">
+<h3>Confusion Matrix</h3>
+<p>A <em>confusion matrix</em> is a table that describes the expected performance of your model. The confusion matrix itself is relatively simple to understand, but the related terminology can be confusing. First the confusion matrix provides an estimate of expected model performance on 100k events based on the selected <em>score threshold</em>.</p>
+<p>Essentially, the score threshold says IF an event’s <em>model score</em> is GREATER THAN OR EQUAL TO the <em>score threshold</em> THEN classify the 4e event as <strong>FRAUD</strong>, conversely IF it is LESS THAN the <em>score threshold</em> it is classified as <strong>LEGIMATE</strong>. Confused yet? Based on the score threshold this will determine the expected:</p>
+<ul>
+<li>True Positives (TP) i.e. the number of events correctly identified as FRAUD<br />
+</li>
+<li>False Positives (FP) i.e. the number of events incorrectly classified as FFAUD that were actually LEGITIMATE<br />
+</li>
+<li>True Negatives (TN) i.e. the number of events correctly identified as LEGITIMATE<br />
+</li>
+<li>False Negatives (FN) i.e. the number of FRAUDS incorrectly classified as LEGITIMATE</li>
+</ul>
+<p>Note: simply divide these by 100k and you can get the expected rates for each classification.</p>
+<p><img src="img/modelconfusion.png" width="100%" /></p>
+<p><strong>ROC Chart</strong></p>
+<p>Advanced users may find the Receiver Operator Characteristic or ROC chart useful. It is simply a different view of score thresholds that highlights the trade off between false positive rates and true positive rates. Where True Positive Rate(TRP) is on the Y-Axis and False Positive Rate(FPR) is on the X-Axis. By choosing a score threshold you are essentially determining the expected TPR and FPR of your model.</p>
+<p><img src="img/modelroc.png" width="100%" /></p>
+</div>
+<div id="operatingRange" class="section level3 unnumbered">
+<h3>Operating Range</h3>
+<p>Here is another view of <em>“score thresholds”</em> and how they align to True Positive Rate, False Positive Rates and Precision. This table is often helpful when determining an <em>“operating range”</em> for your fraud detection efforts. We recommend balancing the False Positive Rate (FPR) and True Positive Rate(TPR) by identifying a “<em>Score Threshold</em>” that matches your business’s operating appetite for false positives. For example in this case, say our business accepts a 4% FPR, this translates into:</p>
+<ol style="list-style-type: decimal">
+<li>A rule IF <strong>model_insightscore</strong> &gt;= 192 THEN <strong>“fraud”</strong>, you would deploy in a detector</li>
+<li>Expected True Positive Rate of <em>92%,</em> i.e. 92% of these events that have a score &gt;= 192, are fraud.</li>
+<li>Expected “Precision” of <em>55%</em>, percent of all fraud found in the data based on that threshold.</li>
+</ol>
+<p><img src="img/modelFPR_TPR.png" width="100%" /></p>
+</div>
+</div>
+<div id="deploymodel" class="section level2 unnumbered">
+<h2>Step 5. Deploy Model</h2>
+<p>The final step is to deploy your model. This creates a model endpoint and makes the model available to Detectors. It also takes around 5 - 10 minutes to complete, so grab a snack.</p>
+<p><img src="img/deploymodel.png" width="100%" /></p>
+<p>Yes you really do want to deploy your model.
+<img src="img/deploymodel2.png" width="100%" /></p>
+</div>
+<div id="createdetector" class="section level2 unnumbered">
+<h2>Step 6. Create a Detector</h2>
+<p>A detector is basically a container that ties model(s) and rule(s) together. This is what you deploy to apply your model to new data. We’ll walk through the steps of creating a detector, adding a model, authoring rules, testing our detector then we’ll deploy it and finally, we’ll use python to call the detector’s endpoint with a notebook to make predictions. The steps are outlined below</p>
+<ul>
+<li>name your detector <strong>project_1_detector</strong>, you can also give it an arbitrary description</li>
+</ul>
+<p><img src="img/createdetector.png" width="100%" /></p>
+<div id="addamodel" class="section level3 unnumbered">
+<h3>Add a Model</h3>
+<p>Here we are going to add our project_1_model to the detector. Models produce an “<em>insightscore</em>” field, this contains the “score” that the event is fraud or legitimate. In this case our model will create a field called <strong>project_1_model_insightscore</strong> which we can reference when we author rules. Scores range between 0 (not risky) and 1000 (most risky), you can see the naming convention is simply MODEL_NAME + &quot;_insightscore&quot;.</p>
+<blockquote>
+<p>Note: Models are “optional” and we have seen cases where a “rule-only” detector can be effective.</p>
+</blockquote>
+<p><img src="img/detectoraddmodel.png" width="100%" /></p>
+<p>Models have to be deployed to add them to a detector. Here we select the <strong>project_1_model</strong> version 1.0 of our model.</p>
+<p><img src="img/detectoraddmodel2.png" width="100%" /></p>
+</div>
+<div id="authorrules" class="section level3 unnumbered">
+<h3>Author Rules</h3>
+<p>We are going to create 4 rules and 4 outcomes (actions) for our detector. I’ll walk you through the first rule then you’ll create the next three yourself. The first thing you’ll notice is that your model produces a new outcome called “<strong>insightscore</strong>”, this is the fraud score from your model.</p>
+<p>A Note on OUTCOMES. Rules can have 1 or MORE outcomes. This is useful to pass along to consuming applications. In fact for our rule 3 we’ll add a “friction” outcome and a “additional verification” outcome. The following is the pseudo code for our four rules we’ll be creating:</p>
+<ul>
+<li><em>rule_1 - IF $project_1_model_insightscore &gt;= 800 THEN block </em></li>
+<li><em>rule_2 - IF $project_1_model_insightscore &gt;= 500 and $project_1_model_insightscore &lt; 800 THEN review</em><br />
+</li>
+<li><em>rule_3 - IF $project_1_model_insightscore &gt;= 300 and $project_1_model_insightscore &lt; 500 THEN friction and additional_verification</em><br />
+</li>
+<li><em>rule_4 - IF $project_1_model_insightscore &lt; 300 THEN approve</em></li>
+</ul>
+<blockquote>
+<p>For more information on rule authoring see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/rule-language-reference.html">Rule Language Reference</a> and <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/deep-dive-expressions.html">Deep Dive: Expressions</a></p>
+</blockquote>
+<p><img src="img/createrule.png" width="100%" /></p>
+<div id="outcome" class="section level4 unnumbered">
+<h4>Create an Outcome</h4>
+<p>Outcomes are simply strings returned from calls to the detector’s <strong>get_prediction</strong> function. Outcomes can be used to trigger events by calling applications, downstream systems or to simply identify who is likely to be fraud and legitimate.</p>
+<p><img src="img/createoutcome.png" width="100%" /></p>
+</div>
+</div>
+<div id="ruleexecution" class="section level3 unnumbered">
+<h3>Rule Execution</h3>
+<p>Fraud Detector’s rule engine has two execution modes “<em>first matched</em>” or “<em>all matched</em>”. “<strong>First matched</strong>” mode is for sequential rule execution, meaning rules have order and the mode returns the outcome for the “first matching rule”, i.e. the first condition met. Typically with a sequential rule engine like this, you want to order your rules so that your <em>most restrictive</em> rules execute first. The other mode is “<strong>All Matched</strong>”, which evaluates all rules and returns outcomes from all of the matching rules. Which mode is right? depends on your business problem. “<strong>All Matched</strong>” will return a list of all outcomes where rule conditions are met. This mode is useful when there is a need to evaluate an event against all of the rules not just the first rule condition matched. In this example we are going to use the “<strong>First matched</strong>” mode for our detector and order the rules by their riskiness.</p>
+<p><img src="img/ruleexecution.png" width="100%" /></p>
+<div id="ruleorder" class="section level4 unnumbered">
+<h4>Rule Ordering</h4>
+<p>You can re-order rules when using the “<strong>First matched</strong>” execution mode.</p>
+<p><img src="img/ruleexecution1.png" width="100%" /></p>
+</div>
+</div>
+<div id="testdetector" class="section level3 unnumbered">
+<h3>Test Detector</h3>
+<p>At this point we have a detector with a model and several rules. Fraud Detector provides the ability to interactively apply your detector to data. Here you can plug in either random data or grab some an example or two from <a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1_new_accounts_5k.csv">project_1_new_accounts_5k.csv</a> to test your detector with.</p>
+<p><img src="img/detectortest.png" width="100%" /></p>
+</div>
+<div id="publishdetector" class="section level3 unnumbered">
+<h3>Publish Detector</h3>
+<p>Now that you’ve tested your detector and verified your rules and model are behaving as expected we are ready to publish it. This will make your detector available to run predictions with.</p>
+<p><img src="img/detectorpublish.png" width="100%" /></p>
+</div>
+</div>
+<div id="makepredictions" class="section level2 unnumbered">
+<h2>Step 7. Make Predictions</h2>
+<p>Lets review where we are at, we have:</p>
+<ul>
+<li>Trained, evaluated and deployed a model:</li>
+<li>Created a detector and added our model to it.</li>
+<li>Authored rules, ordered them and added them to the detector.</li>
+<li>Tested our detector</li>
+<li>Finally we published our detector.</li>
+</ul>
+<p>At this point we are ready to start making predictions using the GetPrediction API. Lets shift to our SageMaker instance and upload the prediction notebook.</p>
+<ul>
+<li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_predict.ipynb">project_1_predict.ipynb</a></li>
+</ul>
+<p>Once loaded simply follow the directions in the notebook. At the end of our notebook you should have a file with 5k predictions that you can then analyze. It should look something like this:</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+score
+</th>
+<th style="text-align:right;">
+status
+</th>
+<th style="text-align:left;">
+outcome
+</th>
+<th style="text-align:left;">
+event_date
+</th>
+<th style="text-align:left;">
+email_address
+</th>
+<th style="text-align:left;">
+ip_address
+</th>
+<th style="text-align:right;">
+is_fraud
+</th>
+<th style="text-align:left;">
+customer_name
+</th>
+<th style="text-align:left;">
+customer_city
+</th>
+<th style="text-align:right;">
+customer_postal
+</th>
+<th style="text-align:left;">
+customer_state
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+[‘approve’]
+</td>
+<td style="text-align:left;">
+2020-04-11
+</td>
+<td style="text-align:left;">
+<a href="mailto:synth_tmorton@yahoo.com" class="email">synth_tmorton@yahoo.com</a>
+</td>
+<td style="text-align:left;">
+84.138.6.238
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Brandon Moran
+</td>
+<td style="text-align:left;">
+Meganstad
+</td>
+<td style="text-align:right;">
+32733
+</td>
+<td style="text-align:left;">
+LA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+[‘approve’]
+</td>
+<td style="text-align:left;">
+2020-04-11
+</td>
+<td style="text-align:left;">
+<a href="mailto:synth_oscott@yahoo.com" class="email">synth_oscott@yahoo.com</a>
+</td>
+<td style="text-align:left;">
+194.147.250.63
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Dominic Murray
+</td>
+<td style="text-align:left;">
+Christinaport
+</td>
+<td style="text-align:right;">
+34319
+</td>
+<td style="text-align:left;">
+MN
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+[‘approve’]
+</td>
+<td style="text-align:left;">
+2020-04-11
+</td>
+<td style="text-align:left;">
+<a href="mailto:synth_aoliver@gmail.com" class="email">synth_aoliver@gmail.com</a>
+</td>
+<td style="text-align:left;">
+192.54.60.50
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Anthony Abbott
+</td>
+<td style="text-align:left;">
+Donaldfurt
+</td>
+<td style="text-align:right;">
+32436
+</td>
+<td style="text-align:left;">
+WA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+653
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+[‘review’]
+</td>
+<td style="text-align:left;">
+2020-04-11
+</td>
+<td style="text-align:left;">
+<a href="mailto:synth_clewis@gmail.com" class="email">synth_clewis@gmail.com</a>
+</td>
+<td style="text-align:left;">
+169.120.193.154
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Kimberly Webb
+</td>
+<td style="text-align:left;">
+Williamburgh
+</td>
+<td style="text-align:right;">
+34399
+</td>
+<td style="text-align:left;">
+AL
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+[‘approve’]
+</td>
+<td style="text-align:left;">
+2020-04-11
+</td>
+<td style="text-align:left;">
+<a href="mailto:synth_katherinedavis@hotmail.com" class="email">synth_katherinedavis@hotmail.com</a>
+</td>
+<td style="text-align:left;">
+192.175.55.43
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Renee James
+</td>
+<td style="text-align:left;">
+East Markland
+</td>
+<td style="text-align:right;">
+33690
+</td>
+<td style="text-align:left;">
+IL
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+992
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+[‘block’]
+</td>
+<td style="text-align:left;">
+2020-04-11
+</td>
+<td style="text-align:left;">
+<a href="mailto:synth_deborahlevy@gmail.com" class="email">synth_deborahlevy@gmail.com</a>
+</td>
+<td style="text-align:left;">
+192.175.49.125
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Marvin Rice
+</td>
+<td style="text-align:left;">
+North Nathanielland
+</td>
+<td style="text-align:right;">
+32023
+</td>
+<td style="text-align:left;">
+PA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="integrateLambda" class="section level2 unnumbered">
+<h2>Step 8. Integration with AWS Lambda &amp; REST API</h2>
+<p>AWS Lambda is an event-driven server-less computing platform. AWS Lambda automatically runs your code without requiring you to provision or manage servers. Just write your Lambda function and trigger it’s execution. In our case we are going to trigger our lambda function from a REST call. This allows us to integrate our Fraud Detector with other systems to stop fraud in real-time, regardless of platform. Here is the recipe:</p>
+<ol style="list-style-type: decimal">
+<li>Create a AWS Lambda Function to call Fraud Detector’s get_prediction function</li>
+<li>Create a REST API using Amazon API Gateway to trigger the Lambda function</li>
+<li>Test your API</li>
+<li>Deploy it</li>
+</ol>
+<div id="lambda" class="section level3 unnumbered">
+<h3>Create a AWS Lambda Function</h3>
+<p>to create a lambda function, fire up Lambda in the console, create a new Lambda, select <strong>author from scratch</strong>, name your lambda <strong>newAccountFraudLambda</strong>, and select <strong>Python 3.7</strong> for the run time environment.</p>
+<p><img src="img/createLambda2.png" width="100%" /></p>
+<p>The copy the following code into your new lambda function.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="im">import</span> json</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="im">import</span> boto3 </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="im">import</span> uuid </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">client <span class="op">=</span> boto3.client(<span class="st">&quot;frauddetector&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">DETECTOR_NAME <span class="op">=</span> <span class="st">&quot;project_1_detector&quot;</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">DETECTOR_VER  <span class="op">=</span> <span class="st">&quot;1.0&quot;</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">MODEL_NAME    <span class="op">=</span> <span class="st">&quot;project_1_model&quot;</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">MODEL_VER     <span class="op">=</span> <span class="st">&quot;1.0&quot;</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">def</span> lambda_handler(event, context):</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="bu">id</span> <span class="op">=</span> uuid.uuid4()</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">        pred  <span class="op">=</span> client.get_prediction(detectorId <span class="op">=</span> DETECTOR_NAME, </a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">                                      detectorVersionId <span class="op">=</span> DETECTOR_VER, </a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">                                      eventId <span class="op">=</span> <span class="bu">str</span>(<span class="bu">id</span>), </a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">                                      eventAttributes <span class="op">=</span> event)</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">                                      </a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">        score_id <span class="op">=</span> pred[<span class="st">&#39;modelScores&#39;</span>][<span class="dv">0</span>][<span class="st">&#39;modelVersion&#39;</span>][<span class="st">&#39;modelId&#39;</span>] <span class="op">+</span> <span class="st">&#39;_insightscore&#39;</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">        event[<span class="st">&#39;prediction_id&#39;</span>]    <span class="op">=</span> <span class="bu">str</span>(<span class="bu">id</span>)</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">        event[<span class="st">&#39;detector_outcome&#39;</span>] <span class="op">=</span> pred[<span class="st">&#39;outcomes&#39;</span>]</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">        event[<span class="st">&#39;model_status&#39;</span>]     <span class="op">=</span> pred[<span class="st">&#39;ResponseMetadata&#39;</span>][<span class="st">&#39;HTTPStatusCode&#39;</span>]</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">        event[<span class="st">&#39;model_score&#39;</span>]      <span class="op">=</span> pred[<span class="st">&#39;modelScores&#39;</span>][<span class="dv">0</span>][<span class="st">&#39;scores&#39;</span>][score_id]</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24">        </a>
+<a class="sourceLine" id="cb1-25" data-line-number="25">        <span class="cf">return</span> {</a>
+<a class="sourceLine" id="cb1-26" data-line-number="26">            <span class="st">&#39;statusCode&#39;</span>: <span class="dv">200</span>,</a>
+<a class="sourceLine" id="cb1-27" data-line-number="27">            <span class="st">&#39;body&#39;</span>: event</a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">        } </a>
+<a class="sourceLine" id="cb1-29" data-line-number="29">    <span class="cf">except</span>:</a>
+<a class="sourceLine" id="cb1-30" data-line-number="30">        pred  <span class="op">=</span> client.get_prediction(detectorId <span class="op">=</span> DETECTOR_NAME, </a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">                                      detectorVersionId <span class="op">=</span> DETECTOR_VER, </a>
+<a class="sourceLine" id="cb1-32" data-line-number="32">                                      eventId <span class="op">=</span> event[<span class="st">&#39;email_address&#39;</span>], </a>
+<a class="sourceLine" id="cb1-33" data-line-number="33">                                      <span class="co">#eventId =str(id),</span></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34">                                      eventAttributes <span class="op">=</span> event)</a>
+<a class="sourceLine" id="cb1-35" data-line-number="35">        </a>
+<a class="sourceLine" id="cb1-36" data-line-number="36">        event[<span class="st">&#39;prediction_id&#39;</span>]    <span class="op">=</span> <span class="bu">str</span>(<span class="bu">id</span>)</a>
+<a class="sourceLine" id="cb1-37" data-line-number="37">        event[<span class="st">&#39;detector_outcome&#39;</span>] <span class="op">=</span> <span class="st">&#39;-- failed --&#39;</span></a>
+<a class="sourceLine" id="cb1-38" data-line-number="38">        event[<span class="st">&#39;model_status&#39;</span>]     <span class="op">=</span> pred[<span class="st">&#39;ResponseMetadata&#39;</span>][<span class="st">&#39;HTTPStatusCode&#39;</span>]</a>
+<a class="sourceLine" id="cb1-39" data-line-number="39">        event[<span class="st">&#39;model_score&#39;</span>]      <span class="op">=</span>  <span class="dv">-1</span> </a>
+<a class="sourceLine" id="cb1-40" data-line-number="40">        </a>
+<a class="sourceLine" id="cb1-41" data-line-number="41">        <span class="cf">return</span> {</a>
+<a class="sourceLine" id="cb1-42" data-line-number="42">            <span class="st">&#39;statusCode&#39;</span>: pred[<span class="st">&#39;ResponseMetadata&#39;</span>][<span class="st">&#39;HTTPStatusCode&#39;</span>],</a>
+<a class="sourceLine" id="cb1-43" data-line-number="43">            <span class="st">&#39;body&#39;</span>: event</a>
+<a class="sourceLine" id="cb1-44" data-line-number="44">        }</a></code></pre></div>
+<p>It should look something like this.</p>
+<p><img src="img/createLambda3.png" width="100%" /></p>
+</div>
+<div id="testLambda" class="section level3 unnumbered">
+<h3>Test your Lambda</h3>
+<p>Configure a <strong>Test</strong> Event. Call your test <strong>POST</strong></p>
+<p>Copy the following into your test event and select Save.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">&quot;ip_address&quot;</span><span class="fu">:</span> <span class="st">&quot;1.118.212.96&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">&quot;email_address&quot;</span><span class="fu">:</span> <span class="st">&quot;synth_richardmcmillan@yahoo.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="dt">&quot;user_agent&quot;</span><span class="fu">:</span> <span class="st">&quot;Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 4.0; Trident/5.1)&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="dt">&quot;customer_city&quot;</span><span class="fu">:</span> <span class="st">&quot;Samuelside&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="dt">&quot;customer_state&quot;</span><span class="fu">:</span> <span class="st">&quot;NY&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="dt">&quot;customer_postal&quot;</span><span class="fu">:</span> <span class="st">&quot;33560.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="dt">&quot;event_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;nan&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="dt">&quot;customer_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Charles Jacobson&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">  <span class="dt">&quot;phone_number&quot;</span><span class="fu">:</span> <span class="st">&quot;(555)117 - 1006&quot;</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="fu">}</span></a></code></pre></div>
+<p>It should look something like this</p>
+<p><img src="img/testLambdaSetup.png" width="100%" /></p>
+<p>Now Test your Lambda Function!</p>
+<p><img src="img/createLambdaTestPolicy1.png" width="100%" /></p>
+<p>Oops!!! We need to attach Fraud Detector’s getPrediction action to our Lambda function.</p>
+<p>Click permissions and this will bring you to where you can attach Policies to your lambda function.</p>
+<p><img src="img/createLambdaTestPolicy2.png" width="100%" /></p>
+<p>I created a policy called “lambdaGetPrediction” which just has Fraud Detector’s getPrediction action,</p>
+<p><img src="img/createLambdaTestPolicy3.png" width="100%" /></p>
+<p>and then attached the policy to my lambda function</p>
+<p><img src="img/createLambdaTestPolicy6.png" width="100%" /></p>
+<div id="realTest" class="section level4 unnumbered">
+<h4>Now we are really ready to test!!</h4>
+<p>Select Test.</p>
+<p><img src="img/createLambdaTest2.png" width="100%" /></p>
+<p>BAM! we have a successful test… now on to creating an API.</p>
+</div>
+</div>
+<div id="createAPI" class="section level3 unnumbered">
+<h3>Create REST API with Amazon API Gateway</h3>
+<p>Amazon API Gateway is a managed service that makes it easy to create, publish and secure APIs. In this case, the API is gong to act like a “front door” to our Lambda function. Once created, our new API will enable real-time two-way communication between applications. API Gateway handles all the tasks involved in accepting and processing our concurrent API calls at scale.</p>
+<blockquote>
+<p>note: you can also trigger Lambda functions from a wide variety of events including landing an S3 file in a bucket.</p>
+</blockquote>
+<p><img src="img/createRestAPI1.png" width="100%" /></p>
+<p>Next we need to name our API. In this case I named mine <strong>newAccountFraudApi</strong></p>
+<p><img src="img/createRestAPI2.png" width="100%" /></p>
+<p>Next create a resource named <strong>newaccount</strong>, add the <strong>POST</strong> method and finally link your API to your Lambda Function <strong>newAccountFraudLambda</strong>. We use a POST method rather than a GET method simply because it’s easier and more secure. GET parameters are passed via URL, they are easily exposed in server logs and browser history. POST just puts the information in request message body.</p>
+<p><img src="img/createRestAPI4.png" width="100%" /></p>
+<p>At this point your API should look something like the following. Essentially this is the mapping of your call from request to lambda to response.</p>
+<p><img src="img/createRestAPI6.png" width="100%" /></p>
+</div>
+<div id="testAPI" class="section level3 unnumbered">
+<h3>Test your REST API</h3>
+<p>Next we want to test our API, to do this we simply click Test</p>
+<p><img src="img/createRestAPI7.png" width="100%" /></p>
+<p>Add the following to the Request Body, since we are doing a POST rather than a GET we can just jam our JSON in the body.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">{</span><span class="dt">&quot;ip_address&quot;</span><span class="fu">:</span> <span class="st">&quot;169.120.193.154&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dt">&quot;email_address&quot;</span><span class="fu">:</span> <span class="st">&quot;synth_clewis@gmail.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">&quot;user_agent&quot;</span><span class="fu">:</span> <span class="st">&quot;Mozilla/5.0 (Macintosh; PPC Mac OS X 10_10_9; rv:1.9.3.20) Gecko/2016-11-26 21:58:43 Firefox/13.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="dt">&quot;customer_city&quot;</span><span class="fu">:</span> <span class="st">&quot;Williamburgh&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="dt">&quot;customer_state&quot;</span><span class="fu">:</span> <span class="st">&quot;AL&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="dt">&quot;customer_postal&quot;</span><span class="fu">:</span> <span class="st">&quot;34399.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="dt">&quot;event_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2020-04-11 17:48:52&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="dt">&quot;customer_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Kimberly Webb&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="dt">&quot;phone_number&quot;</span><span class="fu">:</span> <span class="st">&quot;(555)588 - 4426&quot;</span><span class="fu">}</span></a></code></pre></div>
+<p>Here’s the response back from our Lambda call. You can see in the response we sent back the event with a prediction_id, detector_outcomes, model_score and status. Of course you can modify your lambda function’s response to be really anything your application needs.</p>
+<p><img src="img/apiTest1.png" width="100%" /></p>
+</div>
+<div id="deployAPI" class="section level3 unnumbered">
+<h3>Deploy your REST API</h3>
+<p>The last step is to deploy your API, this makes a callable URL for your REST API. To do this you simply create a “stage”, I created one called PROD and deployed my API to it. You’ll end up with a URL like this. <a href="https://ewnwtespu4.execute-api.us-east-1.amazonaws.com/PROD/newaccount" class="uri">https://ewnwtespu4.execute-api.us-east-1.amazonaws.com/PROD/newaccount</a></p>
+<p><img src="img/apiURL.png" width="100%" /></p>
+</div>
+<div id="curlAPI" class="section level3 unnumbered">
+<h3>Curl your REST API</h3>
+<p>cURL is a command line tool which can be used to call an API from command line. I’m lazy so i created a file with my prediction record, called <strong>record.txt</strong></p>
+<p>record.txt just contains the following</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">{</span><span class="dt">&quot;ip_address&quot;</span><span class="fu">:</span> <span class="st">&quot;169.120.193.154&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">&quot;email_address&quot;</span><span class="fu">:</span> <span class="st">&quot;synth_clewis@gmail.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">&quot;user_agent&quot;</span><span class="fu">:</span> <span class="st">&quot;Mozilla/5.0 (Macintosh; PPC Mac OS X 10_10_9; rv:1.9.3.20) Gecko/2016-11-26 21:58:43 Firefox/13.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">&quot;customer_city&quot;</span><span class="fu">:</span> <span class="st">&quot;Williamburgh&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">&quot;customer_state&quot;</span><span class="fu">:</span> <span class="st">&quot;AL&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">&quot;customer_postal&quot;</span><span class="fu">:</span> <span class="st">&quot;34399.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="dt">&quot;event_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2020-04-11 17:48:52&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="dt">&quot;customer_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Kimberly Webb&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  <span class="dt">&quot;phone_number&quot;</span><span class="fu">:</span> <span class="st">&quot;(555)588 - 4426&quot;</span><span class="fu">}</span></a></code></pre></div>
+<p>I then use –data option to pass my text file to my REST service</p>
+<p>Here is my curl command:</p>
+<blockquote>
+<p>curl –data <span class="citation">@record.txt</span> <a href="https://ewnwtespu4.execute-api.us-east-1.amazonaws.com/PROD/newaccount" class="uri">https://ewnwtespu4.execute-api.us-east-1.amazonaws.com/PROD/newaccount</a></p>
+</blockquote>
+<p>and my response:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">{</span><span class="dt">&quot;statusCode&quot;</span><span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;ip_address&quot;</span><span class="fu">:</span> <span class="st">&quot;169.120.193.154&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="dt">&quot;email_address&quot;</span><span class="fu">:</span> <span class="st">&quot;synth_clewis@gmail.com&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="dt">&quot;user_agent&quot;</span><span class="fu">:</span> </a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">      <span class="st">&quot;Mozilla/5.0 (Macintosh; PPC Mac OS X 10_10_9; rv:1.9.3.20) Gecko/2016-11-26 21:58:43 Firefox/13.0&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="dt">&quot;customer_city&quot;</span><span class="fu">:</span> <span class="st">&quot;Williamburgh&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    <span class="dt">&quot;customer_state&quot;</span><span class="fu">:</span> <span class="st">&quot;AL&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    <span class="dt">&quot;customer_postal&quot;</span><span class="fu">:</span> <span class="st">&quot;34399.0&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="dt">&quot;event_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2020-04-11 17:48:52&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    <span class="dt">&quot;customer_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Kimberly Webb&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    <span class="dt">&quot;phone_number&quot;</span><span class="fu">:</span> <span class="st">&quot;(555)588 - 4426&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">    <span class="dt">&quot;prediction_id&quot;</span><span class="fu">:</span> <span class="st">&quot;b483a095-2823-43ad-9bb3-912c04678ae8&quot;</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">    <span class="dt">&quot;detector_outcome&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;review&quot;</span><span class="ot">]</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="dt">&quot;model_status&quot;</span><span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span> </a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">    <span class="dt">&quot;model_score&quot;</span><span class="fu">:</span> <span class="fl">653.0</span><span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">  <span class="fu">}</span></a></code></pre></div>
+</div>
+</div>
+<div id="proj1Conclusion" class="section level2 unnumbered">
+<h2>Conclusion</h2>
+<p>Congratulations, you have made it through the hands on tutorial and gone “end to end” with Amazon Fraud Detector. You’ve done the following:</p>
+<ol style="list-style-type: decimal">
+<li>Trained and Evaluated a Fraud Detector Model</li>
+<li>Created a Detector and Authored Rules</li>
+<li>Tested and Published a Detector</li>
+<li>Made predictions on new data</li>
+<li>Created and Tested a Lambda function for integration with other AWS services</li>
+<li>Created and Tested your own REST API so that your Detector can be called from anywhere</li>
+</ol>
+<p>What’s next? Your next step is to creating your own Proof of Concept with Fraud Detector!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
