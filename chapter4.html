@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Project 3 - SageMaker Integration | Hands on Amazon Fraud Detector</title>
+  <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Project 3 - SageMaker Integration | Hands on Amazon Fraud Detector" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Project 3 - SageMaker Integration | Hands on Amazon Fraud Detector" />
+  
+  <meta name="twitter:description" content="This is a tutorial on Amazon Fraud Detector." />
+  
+
+<meta name="author" content="Michael Ames | mikames@amazon.com" />
+
+
+<meta name="date" content="2020-05-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter3.html"/>
+<link rel="next" href="poc.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About Amazon Fraud Detector</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prereq"><i class="fa fa-check"></i>Setup &amp; Prerequisites</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dpsetup1"><i class="fa fa-check"></i>Project Setup</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#s3"><i class="fa fa-check"></i>Create S3 Bucket</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create Sagemaker Instance</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#howitworks"><i class="fa fa-check"></i>Quick Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html"><i class="fa fa-check"></i>Project 1 - New Account Fraud</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#bmodel1"><i class="fa fa-check"></i>Step 1. Define model</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds1"><i class="fa fa-check"></i>Setup a Data Source</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds2"><i class="fa fa-check"></i>Create an IAM role</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ds3"><i class="fa fa-check"></i>Training data source</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#configmodel"><i class="fa fa-check"></i>Step 2. Configure Model</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#map1"><i class="fa fa-check"></i>Map File Inputs</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#fraudlabel1"><i class="fa fa-check"></i>Map Fraud Label</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#rvc"><i class="fa fa-check"></i>Step 3. Create &amp; Train Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#modelperf"><i class="fa fa-check"></i>Step 4. Model Training Complete</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#mp"><i class="fa fa-check"></i>Model Performance</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#auc"><i class="fa fa-check"></i>Understanding AUC</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#confmatrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#operatingRange"><i class="fa fa-check"></i>Operating Range</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deploymodel"><i class="fa fa-check"></i>Step 5. Deploy Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createdetector"><i class="fa fa-check"></i>Step 6. Create a Detector</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#addamodel"><i class="fa fa-check"></i>Add a Model</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#authorrules"><i class="fa fa-check"></i>Author Rules</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#ruleexecution"><i class="fa fa-check"></i>Rule Execution</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testdetector"><i class="fa fa-check"></i>Test Detector</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#publishdetector"><i class="fa fa-check"></i>Publish Detector</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#makepredictions"><i class="fa fa-check"></i>Step 7. Make Predictions</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#integrateLambda"><i class="fa fa-check"></i>Step 8. Integration with AWS Lambda &amp; REST API</a><ul>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#lambda"><i class="fa fa-check"></i>Create a AWS Lambda Function</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testLambda"><i class="fa fa-check"></i>Test your Lambda</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createAPI"><i class="fa fa-check"></i>Create REST API with Amazon API Gateway</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testAPI"><i class="fa fa-check"></i>Test your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deployAPI"><i class="fa fa-check"></i>Deploy your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#curlAPI"><i class="fa fa-check"></i>Curl your REST API</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter3.html"><a href="chapter3.html"><i class="fa fa-check"></i>Project 2 - Guest Checkout / First Event Fraud</a><ul>
+<li class="chapter" data-level="" data-path="chapter3.html"><a href="chapter3.html#proj2_setup"><i class="fa fa-check"></i>Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter4.html"><a href="chapter4.html"><i class="fa fa-check"></i>Project 3 - SageMaker Integration</a></li>
+<li class="chapter" data-level="" data-path="poc.html"><a href="poc.html"><i class="fa fa-check"></i>Your own Proof of Concept</a><ul>
+<li class="chapter" data-level="0.1" data-path="poc.html"><a href="poc.html#planning-your-proof-of-concept-for-online-fraud-insights"><i class="fa fa-check"></i><b>0.1</b> Planning your Proof of Concept for Online Fraud Insights</a></li>
+<li class="chapter" data-level="" data-path="poc.html"><a href="poc.html#guidance1"><i class="fa fa-check"></i>Dataset Guidance for Building Models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Fraud 101</a><ul>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#ccf"><i class="fa fa-check"></i>Fraud Lifecycle</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#afds"><i class="fa fa-check"></i>Amazon Fraud Detector Strategy</a><ul>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#prevent"><i class="fa fa-check"></i>Prevent</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#detect"><i class="fa fa-check"></i>Detect</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#remediate"><i class="fa fa-check"></i>Remediate &amp; Contain</a></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#improve"><i class="fa fa-check"></i>Improve</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Hands on Amazon Fraud Detector</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter4" class="section level1 unnumbered">
+<h1>Project 3 - SageMaker Integration</h1>
+<p>New account fraud is generally defined as fraud that occurs within the first 90 days of an account opening. These accounts are opened with the sole purpose to commit fraud. Typically, criminals wait 30 days or more before making the first transaction, which is often a low dollar amount say $5 - $200 to “test” a company’s fraud detection system, but often it can be much more. For example Verizon <a href="https://www.verizon.com/about/news/message-ronan-dunne-verizon-consumer-group">reported</a> that new subscriber fraud has gotten so out of hand that (7000 phones stolen a moth) they hat to go to the FC to change regulations in order to put a <a href="https://www.verizon.com/about/news/message-ronan-dunne-verizon-consumer-group">60 day lock down</a> on new phones and to help them deal with the spike in losses. While on the surface, 7000 frauds a month doesn’t sound like much until you factor in that the average cost of a cell phone in the US is $528, thats at least $3.6M in real-dollar losses a month.In this project you are going to build a “New Account Registration” model and detector.</p>
+<p>&lt; insert video &gt;</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="poc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
