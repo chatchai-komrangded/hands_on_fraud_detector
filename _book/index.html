@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hands on Amazon Fraud Detector</title>
   <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hands on Amazon Fraud Detector" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-05-28" />
+<meta name="date" content="2020-05-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,71 +50,8 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 </head>
 
@@ -211,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Hands on Amazon Fraud Detector</h1>
-<p class="date"><em>2020-05-28</em></p>
+<p class="date"><em>2020-05-29</em></p>
 </div>
 <div id="index" class="section level1 unnumbered">
 <h1>Introduction</h1>
@@ -235,15 +172,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="prereq" class="section level2 unnumbered">
 <h2>Setup &amp; Prerequisites</h2>
-<p>While Fraud Detector is in public preview, to get started, you need to have your account white listed to get access to Amazon Fraud Detector. White listing is a simple matter of filling out a form. It takes about a day to get your account enabled, you’ll receive an email once it’s complete. Once enabled follow the steps in the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/set-up.html">Fraud Detector User Guide</a> to setup permissions and create an IAM user and assign required permissions.</p>
+<p>While Fraud Detector is in public preview, to get started, you need to have your account white listed to get access to Amazon Fraud Detector. White listing is a simple matter of filling out a form. It takes about a day to get your account enabled, you’ll receive an email once it’s complete. Once enabled, follow the steps in the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/set-up.html">Fraud Detector User Guide</a> to setup permissions and create an IAM user and assign required permissions.</p>
 <div id="dpsetup1" class="section level3 unnumbered">
 <h3>Project Setup</h3>
-<p>In order to run the projects, we recomend that you create an S3 bucket and upload sample data. Several jupyter notebooks are provided for calling Fraud Detector’s prediction API as well as prepare data for the projects. We recomend using SageMaker to run the notebooks.</p>
+<p>In order to run the projects, we recommend that you create an S3 bucket and upload sample data. Several jupyter notebooks are provided for calling Fraud Detector’s prediction API as well as preparing data for the projects. We recommend using SageMaker to run the notebooks.</p>
 </div>
 <div id="s3" class="section level3 unnumbered">
 <h3>Create S3 Bucket</h3>
-<p>The first step in getting prepared to run the Fraud Detector hands on projects, is to setup a S3 bucket where you can upload the project files.</p>
-<p><strong>Create an S3 bucket</strong> named <strong><em>hands-on-frauddetector</em></strong></p>
+<p>The first step in getting prepared to run the Fraud Detector hands on projects, is to setup a <a href="https://console.aws.amazon.com/s3">S3</a> bucket where you can upload the project files.</p>
+<p><strong>Create an S3 bucket</strong> named <strong><em>hands-on-frauddetector</em></strong> (The bucket name need to be unique globally.)</p>
 <div class="figure"><span id="fig:unnamed-chunk-1"></span>
 <img src="img/s3bucket.png" alt="S3 Bucket" width="100%" />
 <p class="caption">
@@ -276,7 +213,7 @@ Figure 2: Create SageMaker Instance
 </div>
 <div id="howitworks" class="section level2 unnumbered">
 <h2>Quick Overview</h2>
-<p>Building a model and deploying a detector is a pretty straight forward process. As a user, simply upload a CSV containing your historic events to an S3 bucket. Next configure your model in the Fraud Detector console by mapping your file’s fields to Fraud Detector’s data types and initiate training. Once training is complete, add your model to a Detector and author business rules to identify fraud as well as actions you want to take.</p>
+<p>Building a model and deploying a detector is a pretty straight forward process. As a user, simply upload a CSV containing your historic events to an S3 bucket. Next, configure your model in the Fraud Detector console by mapping your file’s fields to Fraud Detector’s data types and initiate training. Once training is complete, add your model to a Detector and author business rules to identify fraud as well as actions you want to take.</p>
 <div class="figure"><span id="fig:howitworks"></span>
 <img src="img/howitworks.png" alt="How it Works" width="100%" />
 <p class="caption">
@@ -284,16 +221,16 @@ Figure 3: How it Works
 </p>
 </div>
 <p><strong>Fraud Detector’s ML</strong><br />
-Behind the scenes Fraud Detector takes care of the heavy lifting for you. Fierst, it loads your data into memory, inspects it and performs a variety of integrity and validation checks. Next it goes through a series of enrichments, variables like IP address, Email address, and Credit Card are enriched with additoinal information. For example IP addresses are enriched with geo-locations, autonomous system numbers (ASN), ISPs, domain and organzation as well as many other varibles. Fraud Detector further enriches fields like IP address, email address, and credit card bin information with <em>Amazon Enrichments</em>. Amazon Enrichments are essentially patterns and signal from past attempts to defaud Amazon, Amzon Subsidiaries and AWS. These enrichments help bring additional predictive power to a customer’s data, above what they could achive on their own. Finally, Fraud Detector evaluates various algorithms and optimizes their performance producing a Model ready to attack fraud.</p>
+Behind the scenes, Fraud Detector takes care of the heavy lifting for you. First, it loads your data into memory, inspects it and performs a variety of integrity and validation checks. Next it goes through a series of enrichments, variables like IP address, Email address, and Credit Card are enriched with additional information. For example IP addresses are enriched with geo-locations, autonomous system numbers (ASN), ISPs, domain and organization as well as many other variables. Fraud Detector further enriches fields like IP address, email address, and credit card bin information with <em>Amazon Enrichments</em>. Amazon Enrichments are essentially patterns and signal from past attempts to defraud Amazon, Amazon Subsidiaries and AWS. These enrichments help bring additional predictive power to a customer’s data, above what they could achieve on their own. Finally, Fraud Detector evaluates various algorithms and optimizes their performance producing a Model ready to attack fraud.</p>
 </div>
 <div id="goals" class="section level2 unnumbered">
 <h2>Goals</h2>
 <p>By the end of this workshop, you should have picked up the following skills:</p>
 <ul>
-<li>Prepare and map data-sets to Amazon Fraud Detector.</li>
-<li>Identify common use cases.</li>
-<li>Train Models, Author Rules and Deploy Detectors using the Fraud Detector Console.</li>
-<li>Interpret model performance metrics.</li>
+<li>Prepare and map data-sets to Amazon Fraud Detector</li>
+<li>Identify common use cases</li>
+<li>Train Models, Author Rules and Deploy Detectors using the Fraud Detector Console</li>
+<li>Interpret model performance metrics</li>
 <li>Define strategies to get the most out of Fraud Detector Models &amp; Rules</li>
 <li>Call the Detector’s get_prediction API to score data with python</li>
 <li>Create an AWS Lambda to call Detector’s get_prediction API</li>
