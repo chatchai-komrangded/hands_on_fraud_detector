@@ -651,28 +651,42 @@ Fraud / Not-Fraud
 <p>A containment strategy, essentially limiting exposure to new account activity, is a simple and effective way to “contain” exposure to potential fraudulent events once an account has been successfully registered. Conceptually, this is similar to a limit on a credit card in that registering a new, unknown customer represents the assumption of some amount of risk, and having a limit bounds the damage possible from an inaccurate assessment of this risk.</p>
 <p>A simple way to implement a containment strategy is to deploy business rules. For example, using rules that look at account age and limit initial activity or add additional friction for first actions is a simple approach to limit potential fraud exposure. In an eCommerce setting, for example, a user could author a simple rule that simply asks for additional verification if the initial spend is over a threshold based on account age.</p>
 <blockquote>
-<p>IF $account_age LESS THAN 30 Days AND $transaction_amount GREATER THAN 200 THEN <em>additional as for verification</em></p>
+<p>IF $account_age LESS THAN 30 Days<br />
+AND $transaction_amount GREATER THAN 200<br />
+THEN <em>additional as for verification</em></p>
 </blockquote>
 <p>In the case of a post-paid service provider, you might want to limit the “blast radius” by limiting the activities a user can perform in a day based on account age.Here are three rules with with different age ranges and a daily activity counter that limits the blast radius as the account ages.</p>
 <blockquote>
-<p>IF $account_age LESS THAN 30 Days AND $number_of_events_today GREATER THAN 5 THEN <em>prevent additional activity</em></p>
+<p>IF $account_age LESS THAN 30 Days<br />
+AND $number_of_events_today GREATER THAN 5<br />
+THEN <em>prevent additional activity</em></p>
 </blockquote>
 <blockquote>
-<p>IF $account_age LESS THAN 60 Days AND $number_of_events_today GREATER THAN 10 THEN <em>prevent additional activity</em></p>
+<p>IF $account_age LESS THAN 60 Days<br />
+AND $number_of_events_today GREATER THAN 10<br />
+THEN <em>prevent additional activity</em></p>
 </blockquote>
 <blockquote>
-<p>IF $account_age LESS THAN 90 Days AND $number_of_events_today GREATER THAN 20 THEN <em>prevent additional activity</em></p>
+<p>IF $account_age LESS THAN 90 Days<br />
+AND $number_of_events_today GREATER THAN 20<br />
+THEN <em>prevent additional activity</em></p>
 </blockquote>
 <p><strong>Combining Rules and ML Based Containment</strong></p>
 <p>Another containment strategy is to leverage the account account registration model’s score as a “trust score”. This way you can limit activity by using the registration model’s risk score and additional business rules business rules to dynamically control activities based on account risk.</p>
 <blockquote>
-<p>IF $account_registration_score LESS THAN 200 AND $transaction_amount GREATER THAN 500 THEN <em>additional friction</em></p>
+<p>IF $account_registration_score LESS THAN 200<br />
+AND $transaction_amount GREATER THAN 500<br />
+THEN <em>additional friction</em></p>
 </blockquote>
 <blockquote>
-<p>IF ($account_registration_score BETWEEN 200 AND 500) AND $transaction_amount GREATER THAN 500 THEN <em>request verification</em></p>
+<p>IF ($account_registration_score BETWEEN 200 AND 500)<br />
+AND $transaction_amount GREATER THAN 500<br />
+THEN <em>request verification</em></p>
 </blockquote>
 <blockquote>
-<p>IF $account_registration_score GREATER THAN 500 AND $transaction_amount GREATER THAN 500 THEN <em>prevent activity</em></p>
+<p>IF $account_registration_score GREATER THAN 500<br />
+AND $transaction_amount GREATER THAN 500<br />
+THEN <em>prevent activity</em></p>
 </blockquote>
 <p>A containment strategy, offers that bit of extra protection until a customer becomes “trusted”. While the strategy is relatively simple, it offers a lot of business benefits. We have seen that customers that employ a containment strategy are able to identify fraudulent actors faster, minimize customer friction, and more importantly limit real dollar losses while limiting impact to legitimate customers.</p>
 </div>
