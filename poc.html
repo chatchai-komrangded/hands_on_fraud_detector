@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction | Hands on Amazon Fraud Detector</title>
+  <title>Your own Proof of Concept | Hands on Amazon Fraud Detector</title>
   <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction | Hands on Amazon Fraud Detector" />
+  <meta property="og:title" content="Your own Proof of Concept | Hands on Amazon Fraud Detector" />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction | Hands on Amazon Fraud Detector" />
+  <meta name="twitter:title" content="Your own Proof of Concept | Hands on Amazon Fraud Detector" />
   
   <meta name="twitter:description" content="This is a tutorial on Amazon Fraud Detector." />
   
 
-<meta name="author" content="" />
+<meta name="author" content="Michael Ames | mikames@amazon.com" />
 
 
-<meta name="date" content="2020-06-01" />
+<meta name="date" content="2020-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="chapter2.html"/>
+<link rel="prev" href="chapter2.html"/>
+<link rel="next" href="chapter1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -128,13 +128,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#index"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About Amazon Fraud Detector</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#prereq"><i class="fa fa-check"></i>Setup &amp; Prerequisites</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#dpsetup1"><i class="fa fa-check"></i>Project Setup</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#s3"><i class="fa fa-check"></i>Create S3 Bucket</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create SageMaker Instance</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create Sagemaker Instance</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#howitworks"><i class="fa fa-check"></i>Quick Overview</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
@@ -175,7 +174,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#proj1Conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Executing a POC with Online Fraud Insights</a><ul>
+<li class="chapter" data-level="" data-path="poc.html"><a href="poc.html"><i class="fa fa-check"></i>Your own Proof of Concept</a><ul>
+<li class="chapter" data-level="0.1" data-path="poc.html"><a href="poc.html#planning-your-proof-of-concept-for-online-fraud-insights"><i class="fa fa-check"></i><b>0.1</b> Planning your Proof of Concept for Online Fraud Insights</a></li>
+<li class="chapter" data-level="" data-path="poc.html"><a href="poc.html#guidance1"><i class="fa fa-check"></i>Dataset Guidance for Building Models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Planning a POC with Online Fraud Insights</a><ul>
 <li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step1POC"><i class="fa fa-check"></i>Step 1. Determine your Use case</a></li>
 <li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step2POC"><i class="fa fa-check"></i>Step 2. Define your Evaluation Criteria</a></li>
 <li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step3POC"><i class="fa fa-check"></i>Step 3. Gather Data</a></li>
@@ -210,93 +213,171 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="index" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p>It doesn’t matter if the company is a mom-and-pop shop or a Fortune 500 industry leader. Everyone has a fraud challenge and a need to get serious about fighting fraud. Unlike standard business problems that can be solved with slice and dice tools, fraud detection requires an investment in technology, people and a strategy that aligns to the business. One need only scan the <a href="https://blogs.wsj.com/riskandcompliance/category/fraud/">headlines</a> to see that fraud is big business, here is a recent example of phishing: <em>$450K Lost in 3 Days: Hackers Trick Victims Into Big Wire Transfers</em> <a href="https://www.wsj.com/articles/losing-450-000-in-three-days-hackers-trick-victims-into-big-wire-transfers-11582453800">WSJ</a>. Here are some stats:</p>
-<ul>
-<li>Fraud losses grew <strong>13% in 2019 to $16.9 billion</strong> according to <a href="https://www.javelinstrategy.com/">Javelin Strategy</a></li>
-<li>Record <strong>1.7M</strong> Fraud reports reported to the <a href="https://www.ftc.gov/news-events/press-releases/2020/01/new-ftc-data-shows-ftc-received-nearly-17-million-fraud-reports">FTC</a> in 2019</li>
-<li><strong>27.8%</strong> &amp; <strong>$3.4B</strong> world wide increase and cost of new account fraud in 2019 <a href="https://www.javelinstrategy.com/">Javelin Strategy</a></li>
-<li><strong>New account fraud</strong> was reported more often than all other forms of identity theft combined in 2019</li>
-<li><strong>$10 - $20</strong> the cost of someone’s identity on the dark web.</li>
-</ul>
-<div id="about" class="section level2 unnumbered">
-<h2>About Amazon Fraud Detector</h2>
-<p>Amazon Fraud Detector is a fully managed service that makes it easy to identify potentially fraudulent online activities such as the creation of fake accounts or online payment fraud. Unlike general purpose machine learning packages, Fraud Detector is designed specifically to detect fraud and rare events. Fraud Detector combines your data, the latest in machine learning science, and more than 20 years of fraud detection experience from Amazon.com and AWS to build machine learning models tailor-made to detect fraud in your business. This distributed workshop has been designed to help get the most out of your Fraud Detector Experience.</p>
-<p>If you are not familiar with Amazon Fraud Detector you can learn more about it here:</p>
-<ul>
-<li><a href="https://aws.amazon.com/fraud-detector/">Product Page</a><br />
-</li>
-<li><a href="https://docs.aws.amazon.com/frauddetector/">Product Documentation</a></li>
-</ul>
-</div>
-<div id="prereq" class="section level2 unnumbered">
-<h2>Setup &amp; Prerequisites</h2>
-<p>While Fraud Detector is in public preview, to get started, you need to have your account white listed to get access to Amazon Fraud Detector. White listing is a simple matter of filling out a form. It takes about a day to get your account enabled, you’ll receive an email once it’s complete. Once enabled follow the steps in the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/set-up.html">Fraud Detector User Guide</a> to setup permissions and create an IAM user and assign required permissions.</p>
-<div id="dpsetup1" class="section level3 unnumbered">
-<h3>Project Setup</h3>
-<p>In order to run the projects, we recommend that you create an S3 bucket and upload sample data. A jupyter notebook is provided for calling Fraud Detector’s prediction API as well as prepare data for the projects. We recommend using SageMaker to run the notebooks.</p>
-</div>
-<div id="s3" class="section level3 unnumbered">
-<h3>Create S3 Bucket</h3>
-<p>The first step in getting prepared to run the Fraud Detector hands on projects, is to setup a S3 bucket where you can upload the project files.</p>
-<p><strong>Create an S3 bucket</strong> named <strong><em>hands-on-frauddetector</em></strong></p>
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
-<img src="img/s3bucket.png" alt="S3 Bucket" width="100%" />
+<div id="poc" class="section level1 unnumbered">
+<h1>Your own Proof of Concept</h1>
+<p>Amazon Fraud Detector can be used to detect a wide variety of fraud scenarios accross industries. Before we jump into creating our own Proof of Concept with Fraud Detector, let’s take a mminute to review the fraud life cycle see how Fraud Detector can help detect fraud faster. Fraud occurs in all shapes and sizes but generally follows the same 3-step life cycle:</p>
+<ol style="list-style-type: decimal">
+<li><p>A bad actor joins your platform</p></li>
+<li><p>The bad actor commits fraud (often multiple times on the same account)</p></li>
+<li><p>Eventually fraud is discovered and the bad actor is blocked.</p></li>
+</ol>
+<div class="figure"><span id="fig:unnamed-chunk-55"></span>
+<img src="img/lifecycle.png" alt="Fraud Lifecycle" width="100%" />
 <p class="caption">
-Figure 1: S3 Bucket
+Figure 4: Fraud Lifecycle
 </p>
 </div>
-<p>Upload the following files to your S3 bucket.</p>
-<p>New Account Fraud</p>
-<ul>
-<li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_new_accounts_100k.csv">project_1_new_account_100k.csv</a><br />
-</li>
-<li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_new_accounts_5k.csv">project_1_new_accounts_5k.csv</a></li>
-</ul>
+<p>The bad actor first registers the account, which we denote as Time Zero (T0). The subsequent fraudulent events occur at time T1, T2, T3 and go undetected by the system. At some later point in time (TN) (e.g. hours, days, or even weeks later in the form of a charge back) the fraud is discovered and the bad actor is blocked.</p>
+<p>Discovering fraud late is costly. There are financial losses related to cost of goods sold, cost of human reviews, and fees associated with charge backs. In addition, there may be reputational damage and potentially regulatory risks for the company. In the perfect scenario, we would identify fraud and stop it before any damage occurs. One way is to catch bad actors as they register the account (T0) and never let them into the platform in the first place. We call this a “Move Left” strategy. This is where Amazon Fraud Detector can help. By leveraging Amazon Fraud Detector’s machine learning, you can build a custom model that can predict who is likely to commit fraud and use the information to help prevent (or minimize) fraud before it ever occurs. We have seen cases where Amazon Fraud Detector has been able to help customers detect fraud up to 95% faster.</p>
+<div id="planning-your-proof-of-concept-for-online-fraud-insights" class="section level2">
+<h2><span class="header-section-number">0.1</span> Planning your Proof of Concept for Online Fraud Insights</h2>
+<p>To get started with a Proof of Concept with the Online Fraud Insights model, it is important to think about:</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Your specific use case:</em> The Online Fraud Insights works well detecting a multitude of online fraud and abuse types such as new account fraud, transaction fraud, promotion abuse, or fake reviews.</p></li>
+<li><p><em>When you want to detect fraud in the life cycle</em>: We follow a “Push Left” This is outlined in the paragraph above and is a key component of designing the right POC. Detecting fraud earlier is best.</p></li>
+</ol>
+<p>We recommend breaking your proof of concept down into three phases:</p>
+<ol style="list-style-type: decimal">
+<li><em>Gathering training data:</em> Gather the data you will use to train the model.</li>
+<li><em>Training Model and Configuring Detector: </em>Build the model and train it to detect fraud in your businesses. Build a Detector, which is a combination of the trained model and rules.</li>
+<li><em>Evaluating Performance: </em>Answer the question - Is Amazon Fraud Detector catching fraud faster and/or reducing my fraud losses?</li>
+</ol>
 </div>
-<div id="sage1" class="section level3 unnumbered">
-<h3>Create SageMaker Instance</h3>
-<p>We are going to use Amazon SageMaker to prepare data and call the Fraud Detector Prediction API from python, but you could use any Jupyter notebook instance as long as you’ve configured your AWS client.</p>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
-<img src="img/crsagemaker.png" alt="Create SageMaker Instance" width="100%" />
-<p class="caption">
-Figure 2: Create SageMaker Instance
-</p>
-</div>
-<p>Upload the following notebooks to your SageMaker</p>
-<p>New Account Fraud</p>
-<ul>
-<li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_predict.ipynb">project_1_predict.ipynb</a></li>
-</ul>
-</div>
-</div>
-<div id="howitworks" class="section level2 unnumbered">
-<h2>Quick Overview</h2>
-<p>Building a model and deploying a detector is a pretty straight forward process. As a user, simply upload a CSV containing your historic events to an S3 bucket. Next configure your model in the Fraud Detector console by mapping your file’s fields to Fraud Detector’s data types and initiate training. Once training is complete, add your model to a Detector and author business rules to identify fraud as well as actions you want to take.</p>
-<div class="figure"><span id="fig:howitworks"></span>
-<img src="img/howitworks.png" alt="How it Works" width="100%" />
-<p class="caption">
-Figure 3: How it Works
-</p>
-</div>
-<p><strong>Fraud Detector’s ML</strong><br />
-Behind the scenes Fraud Detector takes care of the heavy lifting for you. First, it loads your data into memory, inspects it and performs a variety of integrity and validation checks. Next it goes through a series of enrichment, variables like IP address, Email address, and Credit Card are enriched with additional information. For example IP addresses are enriched with geo-locations, autonomous system numbers (ASN), ISPs, domain and organization as well as many other variables. Fraud Detector further enriches fields like IP address, email address, and credit card bin information with <em>Amazon Enrichments</em>. Amazon Enrichments are essentially patterns and signal from past attempts to defraud Amazon, Amazon Subsidiaries and AWS. These enrichments help bring additional predictive power to a customer’s data, above what they could achieve on their own. Finally, Fraud Detector evaluates various algorithms and optimizes their performance producing a Model ready to attack fraud.</p>
-</div>
-<div id="goals" class="section level2 unnumbered">
-<h2>Goals</h2>
-<p>By the end of this workshop, you should have picked up the following skills:</p>
-<ul>
-<li>Prepare and map data-sets to Amazon Fraud Detector.</li>
-<li>Identify common use cases.</li>
-<li>Train Models, Author Rules and Deploy Detectors using the Fraud Detector Console.</li>
-<li>Interpret model performance metrics.</li>
-<li>Define strategies to get the most out of Fraud Detector Models &amp; Rules</li>
-<li>Call the Detector’s get_prediction API to score data with python</li>
-<li>Create an AWS Lambda to call Detector’s get_prediction API</li>
-<li>Create an API using Amazon’s API Gateway to call your Lambda function</li>
-<li>Lead a successful Proof of Concept!</li>
-</ul>
+<div id="guidance1" class="section level2 unnumbered">
+<h2>Dataset Guidance for Building Models</h2>
+<p>Except in rare cases, more data is generally better than less. Fraud Detector requires a minimum of 10k records where at least 500 of those records are identified as fraudulent; however, the more records and variety of fraudulent examples you provide the better. That doesn’t mean you should artificially create examples, instead just get more historic events. Of course that doesn’t mean upload the kitchen sink! Fraud Detector’s Online Fraud Insight(OFI) template only requires a Date or Timestamp, an IP address, email address, and a Field that identifies Fraud / Not Fraud. The following is an example of a minimally viable file structure.</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+ip_address
+</th>
+<th style="text-align:left;">
+email_address
+</th>
+<th style="text-align:left;">
+event_timestamp
+</th>
+<th style="text-align:left;">
+fraud_label
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+125.164.142.171
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_millerdavid@example.org" class="email">fake_millerdavid@example.org</a>
+</td>
+<td style="text-align:left;">
+2019-10-04 07:02:55
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.52.200.124
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_wmichael@example.net" class="email">fake_wmichael@example.net</a>
+</td>
+<td style="text-align:left;">
+2018-11-27 12:47:03
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+169.240.240.125
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_xkramer@example.org" class="email">fake_xkramer@example.org</a>
+</td>
+<td style="text-align:left;">
+2019-01-08 09:11:14
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.7.68.168
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_hnelson@example.com" class="email">fake_hnelson@example.com</a>
+</td>
+<td style="text-align:left;">
+2018-12-29 19:51:09
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.52.192.228
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_andre54@example.com" class="email">fake_andre54@example.com</a>
+</td>
+<td style="text-align:left;">
+2019-03-18 08:06:46
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+169.209.112.148
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_jcraig@example.com" class="email">fake_jcraig@example.com</a>
+</td>
+<td style="text-align:left;">
+2019-06-13 05:34:14
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+106.162.85.104
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_pmorris@example.net" class="email">fake_pmorris@example.net</a>
+</td>
+<td style="text-align:left;">
+2019-03-17 00:14:01
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+192.249.186.94
+</td>
+<td style="text-align:left;">
+<a href="mailto:fake_mfarrell@example.net" class="email">fake_mfarrell@example.net</a>
+</td>
+<td style="text-align:left;">
+2019-08-06 21:14:55
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
@@ -305,8 +386,8 @@ Behind the scenes Fraud Detector takes care of the heavy lifting for you. First,
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

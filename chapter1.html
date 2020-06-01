@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-05-31" />
+<meta name="date" content="2020-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,9 +54,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -65,16 +65,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -83,9 +81,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -130,12 +128,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#index"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About Amazon Fraud Detector</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#prereq"><i class="fa fa-check"></i>Setup &amp; Prerequisites</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#dpsetup1"><i class="fa fa-check"></i>Project Setup</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#s3"><i class="fa fa-check"></i>Create S3 Bucket</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create Sagemaker Instance</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sage1"><i class="fa fa-check"></i>Create SageMaker Instance</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#howitworks"><i class="fa fa-check"></i>Quick Overview</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
@@ -229,23 +228,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are lots of ways to evaluate fraud. We recommend taking a “baseline” of your current efforts. If you start with new account registrations, identify how many accounts on average you register a day, a week and a month. Of those how many become fraudulent? This will give you an idea of your “Baseline”, that becomes a starting point for evaluation. Next, determine how you want to evaluate, it could be number of accounts identified at registration, transaction dollars saved, investigation yield or other use case specific metric. Using these metrics you can compare the “baseline” to fraud detector’s performance.</p>
 <ol style="list-style-type: decimal">
 <li><p>Start with a Baseline</p></li>
-<li><p>Identify performance metrics:</p>
+<li>Identify performance metrics.</li>
+</ol>
 <ul>
-<li>Fraud Identified by False Positive Rate<br />
-</li>
+<li>Fraud Identified by False Positive Rate
+<ul>
 <li>Dollars saved by Score Threshold</li>
 <li>Investigation yield</li>
 <li>Time to Detect</li>
 </ul></li>
-</ol>
+</ul>
 </div>
 <div id="step3POC" class="section level3 unnumbered">
 <h3>Step 3. Gather Data</h3>
 <p>Data gathering dictates the duration and success of a POC. Data gathering is typically an iterative process of extraction and data profiling to ensure that there is enough training data and enough labels to train a model with.</p>
 <p><strong>More data is better, but you can get started with a little.</strong></p>
-<p>Except in rare cases, more data is generally better than less. Fraud Detector’s Online Fraud Insights(OFI) model requires a minimum of 10k records with at least 500 of those records identified as fraudulent; however, the more records and variety of fraudulent examples you provide the better. That does not mean you should artificially create examples, instead just get more historic events. Of course that does not mean upload the kitchen sink! Fraud Detector’s Online Fraud Insight(OFI) template only requires a Date or Timestamp, an IP address, email address, and a Field that identifies Fraud / Not Fraud.</p>
-<p><strong>Minimal Dataset Guidance</strong></p>
-<p>The Online Fraud Insights(OFI) model requires a minimum of 10k records to be gathered with of those 500 records identified as fraud. OFI only requires a date/timestamp, email address, ip address and fraud label. We recommend a minimum of 6 weeks of historic data is collected, though 3 - 6 months of data is preferable. As part of the process, the OFI model partitions your data based on the Event Timestamp such that performance metrics are calculated on the out of sample (latest) data, thus the format of the event timestamp is important.</p>
+<p>Except in rare cases, more data is generally better than less. Fraud Detector’s Online Fraud Insights(OFI) model requires a minimum of 10k records with at least 500 of those records identified as fraudulent; however, the more records and variety of fraudulent examples you provide the better. That does not’t mean you should artificially create examples, instead just get more historic events. Of course that does not mean upload the kitchen sink! Fraud Detector’s Online Fraud Insight(OFI) template only requires a Date or Timestamp, an IP address, email address, and a Field that identifies Fraud / Not Fraud.</p>
+<p><strong>Minimal Dataset Guidance</strong>
+The Online Fraud Insights(OFI) model requires a minimum of 10k records to be gathered with of those 500 records identified as fraud. OFI only requires a date/timestamp, email address, ip address and fraud label. We recommend a minimum of 6 weeks of historic data is collected, though 3 - 6 months of data is preferable. As part of the process the OFI model partitions your data based on the Event Timestamp such that performance metrics are calculated on the out of sample (latest) data, thus the format of the event timestamp is important.</p>
 <p>Here is a sample of a minimally required dataset:</p>
 <table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -380,27 +380,27 @@ TRUE
 </tbody>
 </table>
 <p><strong>Data &amp; Label Maturity</strong></p>
-<p>As part of the data gathering process, we want to insure that records have had sufficient time to “mature”, i.e. that enough time has passed to insure “non-fraud” and “fraud” records have been correctly identified. It often takes 30 - 45 days (or more) to correctly identify fraudulent events, because of this it is important to insure that the latest records are at least 30 days old or older. For example, in the case of detecting charge back fraud, it generally takes a statement cycle or more to identify a fraudulent charge. We recommend that the most recent data in your dataset is at least 4 weeks old. But you know your data best, so use your judgment in deciding which data is old enough to be reliable. That said, don’t expect that models trained on data from 2018 to perform well when you predict on data from 2020. That is because fraud patterns change, sometimes quickly, so we recommend that the oldest data is no more than a year old.</p>
+<p>As part of the data gathering process, we want to insure that records have had sufficient time to “mature”, i.e. that enough time has passed to insure “non-fraud” and “fraud” records have been correctly identified. It often takes 30 - 45 days (or more) to correctly identify fraudulent events, because of this it is important to insure that the latest records are at least 30 days old or older. For example in the case of detecting charge back fraud, it generally takes a statement cycle or more to identify a fraudulent charge. We recommend that the most recent data in your dataset is at least 4 weeks old, but you know your data best, so use your judgment in deciding which data is old enough to be reliable. That said, don’t expect that models trained on data from 2018 to perform well when you predict on data from 2020. That is because fraud patterns change, sometimes quickly, so we recommend that the oldest data is no more than a year old.</p>
 <ul>
 <li>Earliest training data is at least 4 - 6 weeks old</li>
 <li>Oldest data is no more than a year old.</li>
 </ul>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span id="fig:unnamed-chunk-56"></span>
 <img src="img/label_imaturity.png" alt="Example of potentially immature fraud labels starting at day 80 through 90+" width="100%" />
 <p class="caption">
-Figure 1: Example of potentially immature fraud labels starting at day 80 through 90+
+Figure 4: Example of potentially immature fraud labels starting at day 80 through 90+
 </p>
 </div>
 <p><strong>Data Quality matters</strong></p>
 <p>Fraud detector takes care of most of your data quality issues on your behalf as part of its normal training process, however there are a couple of gotchas that can easily be addressed with some pre-planning and profiling of your data. The following guidance can help you avoid the most common issues we’ve seen with customer data.</p>
 <p><em>CSV File not in UTF-8 format.</em> File encoding like Latin-1 (iso-8859-1) can cause file read-issues because Fraud Detector is expecting data to be in UTF-8 format. You can easily convert most any non-UTF-8 format file to UTF-8 with this simple command line recipe.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="chapter1.html#cb1-1"></a><span class="co"># first figure out the character set of your file</span></span>
-<span id="cb1-2"><a href="chapter1.html#cb1-2"></a><span class="op">&gt;</span> <span class="bu">file</span> <span class="op">-</span>I yourfile.csv</span>
-<span id="cb1-3"><a href="chapter1.html#cb1-3"></a></span>
-<span id="cb1-4"><a href="chapter1.html#cb1-4"></a> yourfile.csv: text<span class="op">/</span>plain<span class="op">;</span> <span class="op">*</span>charset<span class="op">**=</span>iso<span class="dv">-8859-1</span><span class="op">*</span></span>
-<span id="cb1-5"><a href="chapter1.html#cb1-5"></a></span>
-<span id="cb1-6"><a href="chapter1.html#cb1-6"></a><span class="co"># second convert your file to UTF-8 </span></span>
-<span id="cb1-7"><a href="chapter1.html#cb1-7"></a><span class="op">&gt;</span> iconv <span class="op">-</span>f <span class="op">*</span>iso<span class="op">**-</span><span class="dv">8859-1</span> <span class="op">*-</span>t <span class="op">*</span>UTF<span class="op">**-</span><span class="dv">8</span><span class="op">**</span> <span class="op">*</span>yourfile.csv <span class="op">&gt;</span> yourfile_utf8.csv</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># first figure out the character set of your file</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="op">&gt;</span> <span class="bu">file</span> <span class="op">-</span>I yourfile.csv</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"> yourfile.csv: text<span class="op">/</span>plain<span class="op">;</span> <span class="op">*</span>charset<span class="op">**=</span>iso<span class="dv">-8859-1</span><span class="op">*</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># second convert your file to UTF-8 </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="op">&gt;</span> iconv <span class="op">-</span>f <span class="op">*</span>iso<span class="op">**-</span><span class="dv">8859-1</span> <span class="op">*-</span>t <span class="op">*</span>UTF<span class="op">**-</span><span class="dv">8</span><span class="op">**</span> <span class="op">*</span>yourfile.csv <span class="op">&gt;</span> yourfile_utf8.csv</a></code></pre></div>
 <p><em>Required Fields and Nulls.</em> The Online Fraud Insight model template has 4 required fields. Fraud detector checks required fields to insure that they contain less than 1% nulls in those fields.</p>
 <ul>
 <li>Consider removing records that have nulls in the Fraud Label, IP or Email Address fields</li>
@@ -410,7 +410,7 @@ Figure 1: Example of potentially immature fraud labels starting at day 80 throug
 <li>Map all of your Fraud Labels to either “Legitimate” and “Fraud” outcomes.</li>
 </ul>
 <blockquote>
-<p>Sidebar: What about indeterminate records, that is records can’t be mapped to fraud or legitimate? One strategy to consider excluding those for model training, then using them as an evaluation dataset to apply your detector to.</p>
+<p>Sidebar: What about “indeterminate” records? you know records we can’t confidently identify as either fraud or legitimate? One strategy is to consider excluding those for model training and use them to evaluate your detector with. This is a easy way to get some immediate value and feedback on your detector.</p>
 </blockquote>
 <p><em>Dates and Times.</em> All dates and timestamps should be in one of the following formats: mm/dd/yyyy, mm/dd/yyyy hh:mm:ss, or yyyy-mm-dd hh:mm:ss. for example 2020/01/30 13:01:01 is valid but 01/30/20 is not because it does not contain a 4 digit year.</p>
 <blockquote>
@@ -449,15 +449,22 @@ We’ve provided a notebook and a python package in our git hub repository that 
 <div id="step7POC" class="section level3 unnumbered">
 <h3>Step 7. Evaluate Predictions</h3>
 <p>Now that you have predictions and outcomes from your Detector. Evaluate your predictions and actions from both a business and a data science perspective. From a business perspective you can look at fraud identified, dollars saved and investigation yield. If labels are available on your evaluation data, you can feasibility create a confusion matrix and calculate AUC and a TPR/FPR/Score Threshold Table.</p>
-<p><em>business perspective</em><br />
-- Fraud Identified by False Positive Rate<br />
-- Dollars saved by Score Threshold<br />
-- Investigation yield<br />
-- Time to Detect</p>
-<p><em>data science perspective</em><br />
-- Confusion Matrix<br />
-- AUC &amp; ROC<br />
-- TPR/FPR/Score Threshold</p>
+<p><em>Business perspective</em></p>
+<ul>
+<li>Fraud Identified by False Positive Rate<br />
+</li>
+<li>Dollars saved by Score Threshold</li>
+<li>Investigation yield</li>
+<li>Time to Detect</li>
+</ul>
+<p><em>Data science perspective</em></p>
+<ul>
+<li>Confusion Matrix<br />
+</li>
+<li>AUC &amp; ROC<br />
+</li>
+<li>TPR/FPR/Score Threshold</li>
+</ul>
 </div>
 <div id="step8POC" class="section level3 unnumbered">
 <h3>Step 8. Integrate</h3>
@@ -465,10 +472,18 @@ We’ve provided a notebook and a python package in our git hub repository that 
 </div>
 <div id="afds" class="section level2 unnumbered">
 <h2>AWS’ Fraud Detection Strategy</h2>
-<p>Ever wonder how AWS protects their users from fraud? It is a well known fact that AWS has one of the best and most sophisticated Fraud Detection systems on the planet. While I can’t give away the details of what Amazon and AWS do to product customers, I can share the strategy and best practices that are used to protect Amazon and AWS. And guess what? Amazon Fraud Detector was built upon those same strategies and best practices. Combining your data with the the latest in machine learning science and more than 20 years of fraud detection experience from Amazon.com and AWS. The AWS strategy can be summed up as <strong>P</strong>revent &gt; <strong>D</strong>etect &gt; <strong>R</strong>emediate &gt; <strong>C</strong>ontain and <strong>I</strong>mprove strategy that protects. The following wile provide a little insight into how to employ a similar strategy in your environment.</p>
+<p>Ever wonder how AWS protects their users from fraud? It is a well known fact that AWS has one of the best and most sophisticated Fraud Detection systems on the planet. Amazon Fraud Detector was built upon those same strategies and best practices. Combining your data with the the latest in machine learning science and more than 20 years of fraud detection experience from Amazon.com and AWS.</p>
+<p>As fraud prevention professionals, our mission is help create the best possible customer experience by balancing the cost of fraud exposure against customer friction for legitimate customers. To execute against the mission, AWS employs a multi-faceted strategy. The strategy can be summed up as <strong>P</strong>revent &gt; <strong>D</strong>etect &gt; <strong>R</strong>emediate &gt; <strong>C</strong>ontain and <strong>I</strong>mprove. The following provides more insight into each pillar along with how to employ a similar strategy in your environment.</p>
+<div class="figure"><span id="fig:unnamed-chunk-58"></span>
+<img src="img/aws_strategy.png" alt="AWS Fraud Prevention Strategy" width="100%" />
+<p class="caption">
+Figure 5: AWS Fraud Prevention Strategy
+</p>
+</div>
 <div id="prevent" class="section level3 unnumbered">
 <h3>Prevent</h3>
-<p>Prevention starts when customers register new accounts. Since most fraud(70-90%) occurs within the first 90 days of account opening, it’s important to start with a plan to analyze New Account Registrations. We recommend start by building a model and deploying detector to identify potentially fraudulent accounts when they register. The following is an example of a New Account Registration schema.</p>
+<p>Prevention starts when customers register new accounts. Since most fraud(70-90%) occurs within the first 90 days of account opening,it’s important to start with a plan to analyze New Account Registrations. We recommend a “move left” strategy, that is start by building a model and deploying detector to identify potentially fraudulent accounts when they register. Evaluating risk at account creation allows you to tailor the customer experience, providing a friction-less experience to low risk customers. This idea of moving “fraud detection left”, at the door, provides a step change in fraud prevention. Enabling you to move from reactive to proactive detection.</p>
+<p>The following is an example of a New Account Registration schema.</p>
 <p><em>New Account Registration</em></p>
 <table class="table table-striped table-hover table-condensed" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -633,16 +648,33 @@ Fraud / Not-Fraud
 </div>
 <div id="contain" class="section level3 unnumbered">
 <h3>Contain</h3>
-<p>A containment strategy, essentially limiting exposure to new account activity, is a simple and effective way to “contain” exposure to potential fraudulent events once an account has been successfully registered. Rules that look at account age and limit initial activity or add additional friction for first actions is a simple approach to limit potential fraud exposure.
-For example in an eCommerce setting a user could author a simple rule that simply asks for additional verification if the initial spend is over a threshold based on account age.</p>
+<p>A containment strategy, essentially limiting exposure to new account activity, is a simple and effective way to “contain” exposure to potential fraudulent events once an account has been successfully registered. Conceptually, this is similar to a limit on a credit card in that registering a new, unknown customer represents the assumption of some amount of risk, and having a limit bounds the damage possible from an inaccurate assessment of this risk.</p>
+<p>A simple way to implement a containment strategy is to deploy business rules. For example, using rules that look at account age and limit initial activity or add additional friction for first actions is a simple approach to limit potential fraud exposure. In an eCommerce setting, for example, a user could author a simple rule that simply asks for additional verification if the initial spend is over a threshold based on account age.</p>
 <blockquote>
-<p>IF $account_age LESS THAN 30 Days AND $transaction_amount &gt; 200 THEN additional_verification</p>
+<p>IF $account_age LESS THAN 30 Days AND $transaction_amount GREATER THAN 200 THEN <em>additional as for verification</em></p>
 </blockquote>
-<p>Another example in a service provider setting might be to limit the number of activities a user can perform on the service based on the time since previous action. A rule might look something like this:</p>
+<p>In the case of a post-paid service provider, you might want to limit the “blast radius” by limiting the activities a user can perform in a day based on account age.Here are three rules with with different age ranges and a daily activity counter that limits the blast radius as the account ages.</p>
 <blockquote>
-<p>IF $account_age LESS THAN 30 Days AND $previous_event LESS THAN 1 Day THEN additional_friction</p>
+<p>IF $account_age LESS THAN 30 Days AND $number_of_events_today GREATER THAN 5 THEN <em>prevent additional activity</em></p>
 </blockquote>
-<p>A containment strategy, offers that little bit of extra protection until a customer becomes “trusted”. While the strategy is relatively simple, it offers a lot of business benefits. We have seen that customers that employ a containment strategy are able to identify fraudulent actors faster, minimize customer friction, and more importantly limit real dollar losses while limiting impact to legitimate customers.</p>
+<blockquote>
+<p>IF $account_age LESS THAN 60 Days AND $number_of_events_today GREATER THAN 10 THEN <em>prevent additional activity</em></p>
+</blockquote>
+<blockquote>
+<p>IF $account_age LESS THAN 90 Days AND $number_of_events_today GREATER THAN 20 THEN <em>prevent additional activity</em></p>
+</blockquote>
+<p><strong>Combining Rules and ML Based Containment</strong></p>
+<p>Another containment strategy is to leverage the account account registration model’s score as a “trust score”. This way you can limit activity by using the registration model’s risk score and additional business rules business rules to dynamically control activities based on account risk.</p>
+<blockquote>
+<p>IF $account_registration_score LESS THAN 200 AND $transaction_amount GREATER THAN 500 THEN <em>additional friction</em></p>
+</blockquote>
+<blockquote>
+<p>IF ($account_registration_score BETWEEN 200 AND 500) AND $transaction_amount GREATER THAN 500 THEN <em>request verification</em></p>
+</blockquote>
+<blockquote>
+<p>IF $account_registration_score GREATER THAN 500 AND $transaction_amount GREATER THAN 500 THEN <em>prevent activity</em></p>
+</blockquote>
+<p>A containment strategy, offers that bit of extra protection until a customer becomes “trusted”. While the strategy is relatively simple, it offers a lot of business benefits. We have seen that customers that employ a containment strategy are able to identify fraudulent actors faster, minimize customer friction, and more importantly limit real dollar losses while limiting impact to legitimate customers.</p>
 </div>
 <div id="detect" class="section level3 unnumbered">
 <h3>Detect</h3>
@@ -844,8 +876,8 @@ AVS codes determine the match or partial match of the consumer’s address infor
 </div>
 <div id="remediate" class="section level3 unnumbered">
 <h3>Remediate</h3>
-<p>Detectors produce scores and outcomes from models and rules. The natural byproduct of scores is either to take an automated decision or to “queue” a event for manual review. The manual review process is necessary when we can’t quite confidently make a determination about an event, whether it’s fraud or not. Manual review is also useful when we want to test <em>“below the line”</em> events, that is where an event scores just below our threshold.</p>
-<p>For example suppose we automatically decline transactions receiving a score greater than 800 and we manually review transactions between 500 and 800. We might want to take a small sample of records “just below” the 500 threshold to double check that we aren’t missing fraud. Manual review is generally a balancing act. On one hand you want to catch as much fraud as possible but on the other you don’t want to review every transaction.</p>
+<p>As a user you combine Fraud Detector models with business rules in a Detector to produce scores and outcomes from models and rules. The natural byproduct of scores is either to take an automated decision or to “queue” a event for manual review. Scores range from 0 - least risky to 1000 the most risky events. The manual review process is necessary when we can’t quite confidently make a determination about an event, whether it’s fraud or not. Manual review is also useful when we want to test <em>“below the line”</em> events, that is where an event scores just below our rule thresholds.</p>
+<p>For example suppose we automatically decline transactions receiving a score greater than 800 and we manually review transactions between 500 and 800. We might want to take a small sample of records “just below” the 500 threshold to double check that we aren’t missing fraud. Manual review is generally a balancing act between alert volumes and finding fraud. On one hand you want to catch as much fraud as possible but on the other you don’t want to review every transaction.</p>
 </div>
 <div id="improve" class="section level3 unnumbered">
 <h3>Improve</h3>
