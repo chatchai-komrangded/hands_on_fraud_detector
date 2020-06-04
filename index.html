@@ -24,7 +24,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2020-06-01" />
+<meta name="date" content="2020-06-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Hands on Amazon Fraud Detector</h1>
-<p class="date"><em>2020-06-01</em></p>
+<p class="date"><em>2020-06-04</em></p>
 </div>
 <div id="index" class="section level1 unnumbered">
 <h1>Introduction</h1>
@@ -251,26 +251,48 @@ Figure 1: S3 Bucket
 </p>
 </div>
 <p>Upload the following files to your S3 bucket.</p>
-<p>New Account Fraud</p>
+<p>New Account Fraud - Github Links</p>
 <ul>
 <li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_new_accounts_100k.csv">project_1_new_account_100k.csv</a><br />
 </li>
 <li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_new_accounts_5k.csv">project_1_new_accounts_5k.csv</a></li>
 </ul>
+<p>Alternative Location</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/wfx29y0rxomgb3r/project_1_new_accounts_100k.csv?dl=0">project_1_new_account_100k.csv</a><br />
+</li>
+<li><a href="https://www.dropbox.com/s/makubcebhxya341/project_1_new_accounts_5k.csv?dl=0">project_1_new_accounts_5k.csv</a></li>
+</ul>
 </div>
 <div id="sage1" class="section level3 unnumbered">
 <h3>Create SageMaker Instance</h3>
-<p>We are going to use Amazon SageMaker to prepare data and call the Fraud Detector Prediction API from python, but you could use any Jupyter notebook instance as long as you’ve configured your AWS client.</p>
+<p>We are going to use Amazon SageMaker to prepare data and call the Fraud Detector Prediction API from python, but you could use any Jupyter notebook instance as long as you’ve configured your AWS client. For this tutorial, you can keep the default Notebook instance type of <strong>ml.t2.medium</strong>.</p>
 <div class="figure"><span id="fig:unnamed-chunk-2"></span>
 <img src="img/crsagemaker.png" alt="Create SageMaker Instance" width="100%" />
 <p class="caption">
 Figure 2: Create SageMaker Instance
 </p>
 </div>
-<p>Upload the following notebooks to your SageMaker</p>
-<p>New Account Fraud</p>
+<p><strong>New IAM Role</strong></p>
+<p>To enable the notebook instance to access and securely upload data to Amazon S3, an IAM role must be specified. In the IAM role field, choose Create a new role to have Amazon SageMaker create a role with the required permissions and assign it to your instance. Alternately, you can choose an existing IAM role in your account for this purpose.</p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="img/createIAMRoleNew.png" alt="Create IAM Role" width="100%" />
+<p class="caption">
+Figure 3: Create IAM Role
+</p>
+</div>
+<p>In the Create an IAM role box, select <strong>Any S3 bucket</strong> to keep it simple. This allows your Amazon SageMaker instance to access all S3 buckets in your account. Later in this tutorial, you’ll be creating a new S3 bucket. However, if you have a bucket you’d want to use instead, select Specific S3 buckets and specify the name of the bucket.</p>
+<p><img src="img/anyS3Bucket.png" width="100%" /></p>
+<p>Notice that Amazon SageMaker created a role called AmazonSageMaker-ExecutionRole-*** for you. For this tutorial, we will use the default values for the other fields. Choose Create notebook instance.</p>
+<p><img src="img/createNotebookInstance.png" width="100%" /></p>
+<p>Finally! Now that you’ve got a SageMaker Notebook Instance. The Nex thing to do is to <em>upload</em> the following notebook to your SageMaker Instance</p>
+<p>New Account Fraud - Github</p>
 <ul>
 <li><a href="https://github.com/mikames/hands_on_fraud_detector/blob/master/project_1/project_1_predict.ipynb">project_1_predict.ipynb</a></li>
+</ul>
+<p>Alternative Location</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/5qujfuqr1odlw1p/project_1_predict.ipynb?dl=0">project_1_predict.ipynb</a></li>
 </ul>
 </div>
 </div>
@@ -280,7 +302,7 @@ Figure 2: Create SageMaker Instance
 <div class="figure"><span id="fig:howitworks"></span>
 <img src="img/howitworks.png" alt="How it Works" width="100%" />
 <p class="caption">
-Figure 3: How it Works
+Figure 4: How it Works
 </p>
 </div>
 <p><strong>Fraud Detector’s ML</strong><br />
