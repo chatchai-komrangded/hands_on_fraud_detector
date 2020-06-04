@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Executing a POC with Online Fraud Insights | Hands on Amazon Fraud Detector</title>
-  <meta name="description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta name="description" content="This is a hands-on tutorial for Amazon Fraud Detector." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Executing a POC with Online Fraud Insights | Hands on Amazon Fraud Detector" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta property="og:description" content="This is a hands-on tutorial for Amazon Fraud Detector." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Executing a POC with Online Fraud Insights | Hands on Amazon Fraud Detector" />
   
-  <meta name="twitter:description" content="This is a tutorial on Amazon Fraud Detector." />
+  <meta name="twitter:description" content="This is a hands-on tutorial for Amazon Fraud Detector." />
   
 
 <meta name="author" content="" />
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter2.html"/>
+<link rel="prev" href="project2.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -164,15 +164,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#publishdetector"><i class="fa fa-check"></i>Publish Detector</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#makepredictions"><i class="fa fa-check"></i>Step 7. Make Predictions</a></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#integrateLambda"><i class="fa fa-check"></i>Step 8. Integration with AWS Lambda &amp; REST API</a><ul>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#lambda"><i class="fa fa-check"></i>Create a AWS Lambda Function</a></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testLambda"><i class="fa fa-check"></i>Test your Lambda</a></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#createAPI"><i class="fa fa-check"></i>Create REST API with Amazon API Gateway</a></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#testAPI"><i class="fa fa-check"></i>Test your REST API</a></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#deployAPI"><i class="fa fa-check"></i>Deploy your REST API</a></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#curlAPI"><i class="fa fa-check"></i>Curl your REST API</a></li>
+<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#proj1Conclusion"><i class="fa fa-check"></i>Conclusion Project 1.</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="chapter2.html"><a href="chapter2.html#proj1Conclusion"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html"><i class="fa fa-check"></i>Project 2. Integration Using AWS Lambda with Amazon API Gateway</a><ul>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#lambda"><i class="fa fa-check"></i>Step 1. Create a AWS Lambda Function</a></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#testLambda"><i class="fa fa-check"></i>Step 3. Test your Lambda</a><ul>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#realTest"><i class="fa fa-check"></i>Now we are really ready to test!!</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#createAPI"><i class="fa fa-check"></i>Step 4. Create REST API with Amazon API Gateway</a></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#testAPI"><i class="fa fa-check"></i>Step 5. Test your REST API</a></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#deployAPI"><i class="fa fa-check"></i>Step 6. Deploy your REST API</a></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#curlAPI"><i class="fa fa-check"></i>Step 7. Curl your REST API</a></li>
+<li class="chapter" data-level="" data-path="project2.html"><a href="project2.html#proj2Conclusion"><i class="fa fa-check"></i>Conclusion - Project 2.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i>Executing a POC with Online Fraud Insights</a><ul>
 <li class="chapter" data-level="" data-path="chapter1.html"><a href="chapter1.html#step1POC"><i class="fa fa-check"></i>Step 1. Determine your Use case</a></li>
@@ -384,10 +387,10 @@ TRUE
 <li>Earliest training data is at least 4 - 6 weeks old</li>
 <li>Oldest data is no more than a year old.</li>
 </ul>
-<div class="figure"><span id="fig:unnamed-chunk-59"></span>
+<div class="figure"><span id="fig:unnamed-chunk-61"></span>
 <img src="img/label_imaturity.png" alt="Example of potentially immature fraud labels starting at day 80 through 90+" width="100%" />
 <p class="caption">
-Figure 5: Example of potentially immature fraud labels starting at day 80 through 90+
+Figure 6: Example of potentially immature fraud labels starting at day 80 through 90+
 </p>
 </div>
 <p><strong>Data Quality matters</strong></p>
@@ -473,10 +476,10 @@ We’ve provided a notebook and a python package in our git hub repository that 
 <h2>AWS’ Fraud Detection Strategy</h2>
 <p>Ever wonder how AWS protects their users from fraud? It is a well known fact that AWS has one of the best and most sophisticated Fraud Detection systems on the planet. Amazon Fraud Detector was built upon those same strategies and best practices. Combining your data with the the latest in machine learning science and more than 20 years of fraud detection experience from Amazon.com and AWS.</p>
 <p>As fraud prevention professionals, our mission is help create the best possible customer experience by balancing the cost of fraud exposure against customer friction for legitimate customers. To execute against the mission, AWS employs a multi-faceted strategy. The strategy can be summed up as <strong>P</strong>revent &gt; <strong>D</strong>etect &gt; <strong>R</strong>emediate &gt; <strong>C</strong>ontain and <strong>I</strong>mprove. The following provides more insight into each pillar along with how to employ a similar strategy in your environment.</p>
-<div class="figure"><span id="fig:unnamed-chunk-61"></span>
+<div class="figure"><span id="fig:unnamed-chunk-63"></span>
 <img src="img/aws_strategy.png" alt="AWS Fraud Prevention Strategy" width="100%" />
 <p class="caption">
-Figure 6: AWS Fraud Prevention Strategy
+Figure 7: AWS Fraud Prevention Strategy
 </p>
 </div>
 <div id="prevent" class="section level3 unnumbered">
@@ -914,7 +917,7 @@ AVS codes determine the match or partial match of the consumer’s address infor
           </div>
         </div>
       </div>
-<a href="chapter2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="project2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
